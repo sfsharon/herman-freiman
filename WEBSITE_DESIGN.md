@@ -310,18 +310,68 @@ Certbot auto-renews via a systemd timer — no manual action needed.
 
 ---
 
-## 10. Maintenance Cheat Sheet
+## 10. How to Start the Website
 
-| Task | Command / Action |
-|------|-----------------|
-| Edit a page | Open `content/<page>.md`, save |
-| Preview changes locally | `cd /root/workspace/herman-freiman && hugo server` |
-| Publish to live site | `cd /root/workspace/herman-freiman && hugo --minify` |
-| Add a photo | Copy file to `static/photos/`, add `{{</* figure */>}}` shortcode in `gallery.md` |
-| Check nginx status | `systemctl status nginx` |
-| TLS renewal (automatic) | No action needed — certbot timer handles it |
+Nginx starts automatically on boot and serves the site at all times. You do not need to do anything to "start" it after the initial setup. To verify it is running:
+
+```bash
+systemctl status nginx
+```
+
+To restart it if ever needed:
+
+```bash
+systemctl restart nginx
+```
+
+The site is served from `/root/workspace/herman-freiman/public/`. Nginx reads that directory directly — no restart is needed after a Hugo rebuild.
 
 ---
 
-*Document status: **Option selected — Hugo + PaperMod. Implementation in progress.***
+## 11. Updating Content (day-to-day workflow)
+
+### Step 1 — Edit the Markdown file
+Open any file in `content/` and save your changes. Example:
+```bash
+nano /root/workspace/herman-freiman/content/biography.md
+```
+
+### Step 2 — Rebuild the site
+Run Hugo from the project directory. **Which command depends on DNS status:**
+
+| DNS situation | Build command |
+|---------------|--------------|
+| DNS not set up yet — testing via IP `46.224.66.242` | `hugo --minify -b http://46.224.66.242/` |
+| DNS live, HTTP only (`hermanfreiman.com` resolves) | `hugo --minify` |
+| DNS live + TLS active (after certbot) | Change `baseURL` in `hugo.toml` to `https://hermanfreiman.com/`, then `hugo --minify` |
+
+Hugo regenerates `public/` in under a second. Nginx immediately serves the updated files — no nginx restart needed.
+
+### Why the different build commands?
+Hugo bakes the `baseURL` into every navigation link in the generated HTML. If the URL in `hugo.toml` is `http://hermanfreiman.com/` but DNS is not yet pointing here, every menu click will try to reach a domain that doesn't exist and fail. Passing `-b http://46.224.66.242/` overrides that for the current build only without changing `hugo.toml`.
+
+### Step 3 — Verify
+```bash
+curl -s -o /dev/null -w "%{http_code}" http://localhost/biography/
+# should print: 200
+```
+
+---
+
+## 12. Maintenance Cheat Sheet
+
+| Task | Command |
+|------|---------|
+| Check site is up | `systemctl status nginx` |
+| Edit a page | `nano content/<page>.md` |
+| Rebuild (DNS not ready) | `cd /root/workspace/herman-freiman && hugo --minify -b http://46.224.66.242/` |
+| Rebuild (DNS ready, HTTP) | `cd /root/workspace/herman-freiman && hugo --minify` |
+| Live-preview while editing | `cd /root/workspace/herman-freiman && hugo server` → open `http://localhost:1313` (requires `-L 1313:localhost:1313` in SSH command) |
+| Add a photo | Copy to `static/photos/`, add `{{</* figure */>}}` shortcode in `gallery.md`, rebuild |
+| Switch to HTTPS after certbot | Edit `baseURL` in `hugo.toml` → `https://hermanfreiman.com/`, then `hugo --minify` |
+| TLS renewal | Automatic — certbot systemd timer handles it, no action needed |
+
+---
+
+*Document status: **Deployed. DNS and TLS pending.***
 *Last updated: June 2026*

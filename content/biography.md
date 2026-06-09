@@ -13,7 +13,7 @@ This page presents consolidated biographical data compiled from Arolsen Archives
 | Field | Information |
 |-------|-------------|
 | Full Name | Herman FREIMAN (also: FRAJMAN, FREIMANN) |
-| Hebrew Name | צבי (Tzvi) |
+| Hebrew Name | צבי (Zvi) |
 | Birth Date | March 2, 1910 (Note: Some documents show 1905) |
 | Birthplace | Boryslaw (Boryslav), Galicia, Poland (now Ukraine) |
 | Religion | Jewish (Jude) |

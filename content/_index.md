@@ -8,10 +8,6 @@ cover:
   relative: false
 ---
 
-*יהי זכרו ברוך — May His Memory Be Blessed*
-
----
-
 **Herman Zvi Freiman** (צבי פריימן) was born on March 2, 1910 in Boryslaw, Galicia — a city that was then part of the Austro-Hungarian Empire, later Poland, and is today western Ukraine. He was a tailor by profession, the son of Feibel and Shifra (née Rosen) Freiman.
 
 He married before the war and had children. His wife and children perished in the Holocaust.

@@ -13,7 +13,7 @@
 | 2 | Fully responsive | Mobile phones through large desktop monitors |
 | 3 | No database | Static content only, no server-side runtime needed |
 | 4 | Single truth point | Markdown file(s) as the sole content source |
-| 5 | Easy to maintain | Admin (non-developer) can update content by editing Markdown |
+| 5 | Easy to maintain | Admin can update content by editing Markdown files |
 | 6 | Deploy on Hetzner VM | Ubuntu 26.04 LTS; Node.js v22, Python 3.14 already present |
 | 7 | Low traffic, temporary | A handful of family members; site may run for 1–2 months |
 
@@ -21,17 +21,18 @@
 
 ## 2. Proposed Site Structure
 
-The current monolithic `Herman_Freiman_Research_Report.md` should be split into dedicated per-page Markdown files. This maps directly to website pages and keeps each content file focused and easy to edit.
+The monolithic `Herman_Freiman_Research_Report.md` is split into dedicated per-page Markdown files. Each file maps to one website page and is independently editable.
 
 ```
 content/
-├── index.md              # Home — brief biography + hero photo
-├── timeline.md           # Sections 4.1–4.4 (Chronological Timeline)
-├── family.md             # Section 5 (Family Tree) + Section 1 (Biography)
-├── documents.md          # Sections 7–8 (Restitution + Transcriptions)
-├── history.md            # Section 9 (Historical Context: Jewish Boryslaw)
-├── gallery.md            # Photo gallery (Personal/ images)
-└── research.md           # Section 10 (Resources & Next Steps) + discrepancies
+├── _index.md       # Home — brief biography + hero portrait
+├── biography.md    # Sections 1–2 (identification, parents, marriage, sources)
+├── timeline.md     # Section 4 (all four chronological periods)
+├── family.md       # Section 5 (ASCII family tree)
+├── documents.md    # Sections 7–8 (restitution documents, transcriptions)
+├── history.md      # Section 9 (historical context: Jewish Boryslaw)
+├── gallery.md      # Photo gallery (Personal/ images with captions)
+└── research.md     # Sections 3, 6, 10 (discrepancies, tattoo, next steps)
 ```
 
 Editing a page = opening one Markdown file and saving. No code changes needed.
@@ -40,7 +41,7 @@ Editing a page = opening one Markdown file and saving. No code changes needed.
 
 ## 3. Technology Options
 
-### Option A — Hugo
+### Option A — Hugo ✅ SELECTED
 
 **What it is:** A static site generator written in Go. Converts Markdown → HTML at build time. Distributed as a single binary.
 
@@ -49,267 +50,278 @@ Editing a page = opening one Markdown file and saving. No code changes needed.
 | **Language** | Go (single self-contained binary, no runtime to manage) |
 | **Build time** | < 1 second for a site this size |
 | **Markdown support** | Native; front-matter (YAML/TOML) per file |
-| **Themes** | Large library; several elegant, minimal memorial/content themes |
-| **Serving** | Build output is plain HTML/CSS/JS → serve with nginx |
-| **Maintenance** | Edit `.md` file → run `hugo` → static files update |
+| **Theme** | PaperMod — minimal, clean, fully responsive |
+| **Serving** | Build output is plain HTML/CSS/JS → served by nginx |
+| **Maintenance** | Edit `.md` file → run `hugo` → nginx serves updated files |
 
 **Pros**
-- No Node.js/Python dependency at build time — single binary install (`apt install hugo` or download)
+- No Node.js/Python needed at build or serve time — single binary
 - Fastest build of any option
-- Very mature and widely used for personal/family sites
-- Rich theme ecosystem; several appropriate minimal themes (PaperMod, Ananke, Hugo Coder)
-- Built-in image processing (resize, WebP conversion) for the photo gallery
+- PaperMod theme is dignified, uncluttered, and mobile-first out of the box
+- Native image processing handles the photo gallery
 - Excellent multilingual support (useful if Hebrew sections grow)
 
 **Cons**
-- Go templating syntax (`{{ .Title }}`) is unfamiliar at first
-- Themes require understanding Hugo's directory layout (layouts, archetypes, static)
-- Less flexible if you ever want interactive components
-
-**Effort estimate:** ~2–3 hours to scaffold, configure theme, and wire up content
+- Go templating syntax (`{{ .Title }}`) takes some getting used to
+- Less flexible if interactive components are ever needed
 
 ---
 
-### Option B — Eleventy (11ty)
+### Option B — Eleventy (11ty) *(not selected)*
 
-**What it is:** A Node.js static site generator. Highly flexible, minimal opinions. Reads Markdown files directly.
+Node.js SSG, highly flexible, mostly DIY CSS/layout. ~4–6 hours of setup effort due to no ready-made theme that suits this content.
 
-| | |
-|-|-|
-| **Language** | Node.js (v22 already installed) |
-| **Build time** | 2–5 seconds for a site this size |
-| **Markdown support** | Native via markdown-it; front-matter per file |
-| **Themes** | Smaller library; more DIY on CSS, or use a starter kit |
-| **Serving** | Build output is plain HTML/CSS/JS → serve with nginx |
-| **Maintenance** | Edit `.md` file → run `npx @11ty/eleventy` → static files update |
+### Option C — Astro *(not selected)*
 
-**Pros**
-- Node.js already present; `npm install` is the only setup step
-- Extremely flexible — any template language (Nunjucks, Liquid, HTML)
-- No magic; you fully control the HTML structure
-- Can use any CSS framework (Tailwind, Pico, plain CSS)
-- Good for long-term maintainability if comfort with HTML/CSS exists
+Modern Node.js, content-first, zero JS shipped to browser. Good option but newer/more complex than needed for a temporary family site.
 
-**Cons**
-- No theme ecosystem comparable to Hugo — CSS/layout work is mostly manual
-- More initial boilerplate to write than Hugo+theme
-- Requires more decisions upfront (which template engine, which CSS approach)
+### Option D — Plain HTML + Pandoc *(not selected)*
 
-**Effort estimate:** ~4–6 hours (more layout work required)
-
----
-
-### Option C — Astro
-
-**What it is:** A modern Node.js framework built specifically for content-heavy sites. Markdown-first, ships zero JavaScript to the browser by default.
-
-| | |
-|-|-|
-| **Language** | Node.js (v22 already installed) |
-| **Build time** | 5–15 seconds |
-| **Markdown support** | First-class; MDX supported for richer content |
-| **Themes** | Growing library; several clean, modern themes |
-| **Serving** | Static build output → serve with nginx |
-| **Maintenance** | Edit `.md` file → run `npm run build` → static files update |
-
-**Pros**
-- Modern developer experience, excellent documentation
-- Content collections: structured Markdown with schema validation
-- Zero JS shipped to browser by default — fastest page loads
-- Component-based layout with `.astro` files (similar to HTML)
-- Starlight (docs theme) or plain Astro themes work well for this type of site
-
-**Cons**
-- Newest of the three options; slightly more tooling complexity
-- `npm run build` step can take 10–15s (unimportant here but notable)
-- More abstraction than Eleventy; less mature than Hugo
-- Content collections require a small schema definition file
-
-**Effort estimate:** ~3–4 hours
-
----
-
-### Option D — Plain HTML + Pandoc + Nginx
-
-**What it is:** Use Pandoc (a universal document converter) to render Markdown → HTML inside a handwritten HTML template. A shell script rebuilds the site on demand. No framework.
-
-| | |
-|-|-|
-| **Language** | Bash + Pandoc (apt-installable) |
-| **Build time** | < 1 second |
-| **Markdown support** | Via Pandoc; excellent rendering fidelity |
-| **Themes** | Manual CSS only |
-| **Serving** | Nginx serves static HTML directly |
-| **Maintenance** | Edit `.md` → run `./build.sh` → done |
-
-**Pros**
-- Absolute minimum dependency footprint
-- Nothing to learn beyond Markdown and basic HTML
-- Pandoc is battle-tested at rendering complex Markdown (tables, RTL Hebrew, code blocks)
-
-**Cons**
-- CSS layout, navigation, responsiveness — all manual
-- No live-preview or development server
-- Photo gallery and responsive images need manual HTML coding
-- Harder to achieve a polished design without significant CSS work
-
-**Effort estimate:** ~5–8 hours (most time on CSS/layout)
+Absolute minimal dependencies but requires all CSS/layout work by hand. ~5–8 hours effort.
 
 ---
 
 ## 4. Comparison Matrix
 
-| Criterion | Hugo | Eleventy | Astro | Pandoc+HTML |
-|-----------|------|----------|-------|-------------|
-| Setup speed | Fast | Medium | Medium | Fast |
-| Markdown → pages | Automatic | Automatic | Automatic | Manual script |
+| Criterion | **Hugo** | Eleventy | Astro | Pandoc+HTML |
+|-----------|----------|----------|-------|-------------|
+| Setup speed | **Fast** | Medium | Medium | Fast |
+| Markdown → pages | **Automatic** | Automatic | Automatic | Manual script |
 | Polished theme available | **Yes** | Partial | Yes | No |
-| Node.js dependency | No | Yes | Yes | No |
-| Responsive out of box | Theme-dependent | Manual | Theme-dependent | Manual |
-| Photo gallery support | Built-in | Manual | Manual | Manual |
-| Admin editing complexity | Edit MD + `hugo` | Edit MD + `npx 11ty` | Edit MD + `npm build` | Edit MD + `./build.sh` |
-| Long-term maintainability | High | High | Medium-High | Medium |
-| Appropriate for this content | **Yes** | Yes | Yes | Yes |
+| Node.js dependency | **No** | Yes | Yes | No |
+| Responsive out of box | **Yes (PaperMod)** | Manual | Theme-dep. | Manual |
+| Photo gallery | **Built-in shortcode** | Manual | Manual | Manual |
+| Admin editing | **Edit MD + `hugo`** | Edit MD + npx | Edit MD + npm | Edit MD + script |
+| Long-term maintainability | **High** | High | Medium-High | Medium |
 
 ---
 
-## 5. Recommendation
+## 5. Selected Option: Hugo + PaperMod
 
-**Hugo** with the **PaperMod** theme.
+**Hugo** with the **PaperMod** theme was selected. Rationale:
 
-**Rationale:**
-- PaperMod is a widely-used, beautiful, minimal theme that renders cleanly on both mobile and large screens — exactly requirement 1 and 2. It has a dignified, uncluttered aesthetic appropriate for a memorial site.
-- No Node.js build dependency (the already-installed Node.js can still be used for optional tooling, but Hugo is self-contained).
-- The fastest path from "edit a Markdown file" to "website updated" — requirement 5.
-- Native image processing handles the family photos (requirement: gallery page).
-- The single-binary install (`apt install hugo` or a direct binary download) means the VM setup is minimal.
-- For this content's lifespan (1–2 months, family audience), Hugo's maturity and zero-runtime model is the lowest-risk choice.
+- PaperMod renders cleanly on mobile and large screens (requirements 1 & 2) with a dignified, minimal aesthetic appropriate for a memorial site.
+- The fastest path from "edit a Markdown file" to "website updated" (requirement 5).
+- Single binary — no runtime process running on the VM; nginx serves pre-built static files only.
+- Native image processing and `figure` shortcodes handle the family photo gallery.
 
 ---
 
 ## 6. Content Architecture
 
-Each Markdown file has a YAML front-matter block at the top (title, description, weight for menu ordering). The body is standard Markdown — same syntax as the existing research report.
-
-```
----
-title: "Timeline"
-description: "Herman Freiman's journey from Boryslaw to Israel"
-weight: 3
----
-
-## Pre-War Period (1910–1941)
-...
-```
+Each Markdown file has a YAML front-matter block (title, description, menu weight). The body is standard Markdown.
 
 ### Page Map
 
-| Page | URL | Source File | Content |
-|------|-----|-------------|---------|
-| Home | `/` | `content/_index.md` | Brief biography, hero portrait photo |
-| Biography | `/biography/` | `content/biography.md` | Sections 1 (identification, parents, marriage) |
-| Timeline | `/timeline/` | `content/timeline.md` | Section 4 (all four periods) |
-| Family Tree | `/family/` | `content/family.md` | Section 5 (ASCII tree) |
-| Documents | `/documents/` | `content/documents.md` | Sections 7–8 (restitution, transcriptions) |
-| History | `/history/` | `content/history.md` | Section 9 (Jewish Boryslaw) |
+| Page | URL | Source File | Content from original report |
+|------|-----|-------------|-------------------------------|
+| Home | `/` | `content/_index.md` | Brief biography, hero portrait |
+| Biography | `/biography/` | `content/biography.md` | Sections 1–2 |
+| Timeline | `/timeline/` | `content/timeline.md` | Section 4 (all periods) |
+| Family Tree | `/family/` | `content/family.md` | Section 5 |
+| Documents | `/documents/` | `content/documents.md` | Sections 7–8 |
+| History | `/history/` | `content/history.md` | Section 9 |
 | Gallery | `/gallery/` | `content/gallery.md` | Personal/ photos with captions |
-| Research | `/research/` | `content/research.md` | Sections 3, 6, 10 (discrepancies, tattoo, next steps) |
+| Research Notes | `/research/` | `content/research.md` | Sections 3, 6, 10 |
+
+**Status: all content files created** (see `content/` directory).
+
+The original `documents/Herman_Freiman_Research_Report.md` is kept untouched as the canonical reference.
 
 ---
 
-## 7. Deployment Architecture
+## 7. Security & Exposure
 
-```
-Hetzner VM (Ubuntu 26.04)
-│
-├── /opt/hermanfreiman/          ← Hugo project root
-│   ├── content/                 ← Markdown source files (single truth point)
-│   ├── static/photos/           ← Symlink or copy of documents/Personal/
-│   └── public/                  ← Hugo build output (generated HTML)
-│
-└── nginx
-    └── /etc/nginx/sites-enabled/hermanfreiman.com
-        └── root → /opt/hermanfreiman/public/
-```
+### 7.1 Do I need TLS (HTTPS)?
 
-**Update workflow for admin:**
-1. Edit a Markdown file in `content/`
-2. Run `hugo` (from the project directory)  
-3. Nginx immediately serves the updated `public/` directory
+**Short answer: No, not strictly required for this use case — but easy and recommended.**
 
-Optionally, a one-line shell alias can chain both steps: `alias publish='hugo && echo Done'`
+TLS is essential when passwords, payment data, or personal user information transit the wire. This site has none of that: it is purely read-only static HTML with no login, no forms, and no cookies.
 
----
+The practical consequences of HTTP-only for this site:
+- Modern browsers show a small "Not Secure" label in the address bar (not a blocking warning).
+- Some corporate firewalls or aggressive browser settings may warn users before loading HTTP pages.
+- Google would rank an HTTPS site higher in search results — irrelevant here since family members will have the direct link.
 
-## 8. Implementation Steps
+**Conclusion:** TLS via Let's Encrypt / Certbot takes under 5 minutes, is free, auto-renews, and removes the "Not Secure" label. It is included in the implementation steps as a recommended hardening measure, not a hard requirement. If you choose to skip it, just serve on port 80 only.
 
-Once this document is approved, implementation proceeds in order:
+### 7.2 Is opening port 80 a security risk?
 
-### Step 1 — Install Hugo
+**Opening port 80 for nginx serving static files is low risk, but the VM itself must be hardened.**
+
+What nginx can and cannot access:
+- Nginx runs as the `www-data` system user (not root). It can only read files inside the configured `root` directory (`public/`).
+- `/root/`, your SSH keys, GitHub credentials, and every other directory on the VM are **completely inaccessible** to nginx and to anyone browsing the website. The web server root is a narrow, isolated directory containing only pre-built HTML/CSS/image files.
+- A static site has no server-side code execution — there is nothing for an attacker to exploit via the web port.
+
+The real risks for the VM are unrelated to the website:
+- **SSH brute force** — mitigated by using key-based SSH auth (disable password login).
+- **Exposed services** — any other ports should be firewalled.
+
+**Recommended VM hardening (one-time setup, takes 10 minutes):**
 ```bash
-# Latest extended version (needed for SCSS themes like PaperMod)
-apt-get install hugo
-# or download binary directly if apt version is too old
+# Allow only SSH, HTTP, and HTTPS; deny everything else
+ufw allow 22/tcp
+ufw allow 80/tcp
+ufw allow 443/tcp     # only if using TLS
+ufw enable
+
+# Disable SSH password auth (if not already done)
+# In /etc/ssh/sshd_config: PasswordAuthentication no
+```
+
+**Defacement risk:** To deface the site an attacker would need SSH access to the VM — which is protected by your SSH key. The web port alone gives no write access to anything.
+
+**Summary:** Open port 80. Harden SSH. Optionally add TLS. Your credentials are safe.
+
+---
+
+## 8. Deployment Architecture
+
+The existing git repository at `/root/workspace/herman-freiman/` **is** the Hugo project root. No second repository or `/opt/` location is needed.
+
+```
+/root/workspace/herman-freiman/          ← Git repo + Hugo project root
+│
+├── content/                             ← Markdown source (single truth point)
+│   ├── _index.md
+│   ├── biography.md
+│   ├── timeline.md
+│   ├── family.md
+│   ├── documents.md
+│   ├── history.md
+│   ├── gallery.md
+│   └── research.md
+│
+├── static/photos/                       ← Family photographs (served as-is)
+├── themes/PaperMod/                     ← Git submodule (read-only theme)
+├── documents/                           ← Original source documents (archived)
+│   ├── Herman_Freiman_Research_Report.md
+│   ├── Arolsen/
+│   ├── Personal/
+│   └── Yad_Vashem/
+├── hugo.toml                            ← Site configuration
+└── public/                             ← Generated output (in .gitignore)
+    └── (served by nginx)
+```
+
+**Nginx points to:** `/root/workspace/herman-freiman/public/`
+
+**Update workflow:**
+1. Edit any `content/*.md` file
+2. Run `hugo --minify` (from `/root/workspace/herman-freiman/`)
+3. Nginx immediately serves the regenerated `public/` directory — no restart needed
+
+---
+
+## 9. Implementation Steps
+
+### Step 1 — Install Hugo (extended version)
+```bash
+# Check if apt version is recent enough (need v0.112+)
+apt-get install -y hugo
+hugo version
+
+# If the apt version is older than v0.112, download the latest binary instead:
+# wget https://github.com/gohugoio/hugo/releases/latest/download/hugo_extended_X.Y.Z_linux-amd64.deb
+# dpkg -i hugo_extended_*.deb
 ```
 
 ### Step 2 — Install Nginx
 ```bash
-apt-get install nginx certbot python3-certbot-nginx
+apt-get install -y nginx
 ```
 
-### Step 3 — Scaffold Hugo Project
+### Step 3 — Add PaperMod as a Git Submodule
 ```bash
-hugo new site /opt/hermanfreiman
-cd /opt/hermanfreiman
-git init
-git submodule add https://github.com/adityatelange/hugo-PaperMod themes/PaperMod
+# Run from the existing repo root — no git init needed
+cd /root/workspace/herman-freiman
+git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod themes/PaperMod
+git submodule update --init --recursive
 ```
 
-### Step 4 — Configure Hugo (`hugo.toml`)
-Set site title, base URL, theme, navigation menu, language, and PaperMod parameters (color scheme, cover image, social links).
+### Step 4 — Hugo Configuration
+`hugo.toml` is already created in the repo root. Review and adjust `baseURL` to match the final domain.
 
-### Step 5 — Split Markdown into Content Files
-Break `documents/Herman_Freiman_Research_Report.md` into the 8 page files listed above. Add YAML front-matter to each. The original file remains untouched as the canonical source.
+### Step 5 — Content Files *(already done)*
+All eight `content/*.md` files are created and populated. `static/photos/` contains all family photographs.
 
-### Step 6 — Copy / Link Photos
-Copy `documents/Personal/` images into `static/photos/` for Hugo to serve. Add a gallery page with captions.
-
-### Step 7 — Local Preview
+### Step 6 — Local Preview
 ```bash
-hugo server -D   # live-preview at http://localhost:1313
+cd /root/workspace/herman-freiman
+hugo server        # live preview at http://localhost:1313
 ```
-Review all pages, check mobile rendering, verify Hebrew text direction.
+Review all pages on desktop and mobile (browser dev tools). Check Hebrew text rendering.
 
-### Step 8 — Configure Nginx
-Create a server block for `hermanfreiman.com` pointing to `/opt/hermanfreiman/public/`. Enable gzip and cache headers.
-
-### Step 9 — TLS Certificate
+### Step 7 — Initial Build
 ```bash
-certbot --nginx -d hermanfreiman.com
-```
-Certbot auto-renews via systemd timer.
-
-### Step 10 — DNS
-Point `hermanfreiman.com` A record to the Hetzner VM's public IP.
-
-### Step 11 — Final Build & Go Live
-```bash
+cd /root/workspace/herman-freiman
 hugo --minify
 ```
+This generates `public/`. Verify `public/index.html` exists.
+
+### Step 8 — Configure Nginx
+Create `/etc/nginx/sites-available/hermanfreiman.com`:
+```nginx
+server {
+    listen 80;
+    server_name hermanfreiman.com www.hermanfreiman.com;
+
+    root /root/workspace/herman-freiman/public;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    # Cache static assets
+    location ~* \.(jpg|jpeg|png|gif|webp|css|js|woff2?)$ {
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+    }
+
+    gzip on;
+    gzip_types text/html text/css application/javascript image/svg+xml;
+}
+```
+```bash
+ln -s /etc/nginx/sites-available/hermanfreiman.com /etc/nginx/sites-enabled/
+nginx -t && systemctl reload nginx
+```
+
+### Step 9 — VM Firewall
+```bash
+ufw allow 22/tcp
+ufw allow 80/tcp
+ufw enable
+```
+
+### Step 10 — DNS
+Log in to your domain registrar. Point the `hermanfreiman.com` A record to the Hetzner VM's public IP address. Propagation typically takes 5–60 minutes.
+
+### Step 11 — TLS Certificate *(optional but recommended)*
+```bash
+apt-get install -y certbot python3-certbot-nginx
+certbot --nginx -d hermanfreiman.com -d www.hermanfreiman.com
+# Also open the firewall for HTTPS:
+ufw allow 443/tcp
+```
+Certbot auto-renews via a systemd timer — no manual action needed.
 
 ---
 
-## 9. Maintenance Cheat Sheet (for admin)
+## 10. Maintenance Cheat Sheet
 
-| Task | Command |
-|------|---------|
-| Edit content | Open any `content/*.md` file, save |
-| Preview locally | `cd /opt/hermanfreiman && hugo server` |
-| Publish changes | `cd /opt/hermanfreiman && hugo --minify` |
-| Add a photo | Copy file to `static/photos/`, add `![caption](photos/filename.jpg)` in gallery.md |
-| Renew TLS (auto) | Handled by certbot systemd timer — no action needed |
+| Task | Command / Action |
+|------|-----------------|
+| Edit a page | Open `content/<page>.md`, save |
+| Preview changes locally | `cd /root/workspace/herman-freiman && hugo server` |
+| Publish to live site | `cd /root/workspace/herman-freiman && hugo --minify` |
+| Add a photo | Copy file to `static/photos/`, add `{{</* figure */>}}` shortcode in `gallery.md` |
+| Check nginx status | `systemctl status nginx` |
+| TLS renewal (automatic) | No action needed — certbot timer handles it |
 
 ---
 
-*Document status: **DRAFT — awaiting option selection***
+*Document status: **Option selected — Hugo + PaperMod. Implementation in progress.***
 *Last updated: June 2026*

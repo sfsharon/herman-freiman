@@ -1,6 +1,4 @@
-# Herman (Tzvi) Freiman — Holocaust Survival Research
-
-*יהי זכרו ברוך — May His Memory Be Blessed*
+# Herman (Zvi) Freiman — Holocaust Survival Research
 
 This repository documents genealogical and historical research into the life of **Herman Zvi Freiman (צבי פריימן)**, a Polish Jewish Holocaust survivor born in Boryslaw, Galicia (now Ukraine) on March 2, 1910. He survived the Boryslaw Ghetto and Forced Labor Camp (ZAL), emigrated to Israel in 1948, and lived in Kfar Ata. His first wife and children perished in the Holocaust.
 

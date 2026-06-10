@@ -1,6 +1,6 @@
 ---
 title: "Herman (Zvi) Freiman / צבי פריימן"
-description: "Genealogical research documenting the life of a Polish Jewish Holocaust survivor from Boryslaw"
+description: "The Story of my grandfather Herman Freiman during WWII"
 cover:
   image: "photos/personal_Zvi_Fraiman_With_Suite_Age_40_Approx.png"
   alt: "Herman (Zvi) Freiman, circa age 40"

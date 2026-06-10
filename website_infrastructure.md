@@ -1,7 +1,10 @@
-# Website Design & Implementation Plan
-## hermanfreiman.com
+# Website Infrastructure & Implementation Plan
+## hermanfreiman.org
 
 *Herman (Zvi) Freiman — Holocaust Survival Research*
+
+> **Note:** This document covers infrastructure, deployment, and build operations.
+> For visual and UX design direction, see [website_design.md](website_design.md).
 
 ---
 

@@ -5,6 +5,51 @@
 
 ---
 
+## Table of Contents
+
+- [1. Requirements Summary](#1-requirements-summary)
+- [2. Proposed Site Structure](#2-proposed-site-structure)
+- [3. Technology Options](#3-technology-options)
+  - [Option A — Hugo SELECTED](#option-a--hugo-selected)
+  - [Option B — Eleventy (11ty)](#option-b--eleventy-11ty-not-selected)
+  - [Option C — Astro](#option-c--astro-not-selected)
+  - [Option D — Plain HTML + Pandoc](#option-d--plain-html--pandoc-not-selected)
+- [4. Comparison Matrix](#4-comparison-matrix)
+- [5. Selected Option: Hugo + PaperMod](#5-selected-option-hugo--papermod)
+- [6. Content Architecture](#6-content-architecture)
+  - [Page Map](#page-map)
+- [7. Security & Exposure](#7-security--exposure)
+  - [7.1 Do I need TLS (HTTPS)?](#71-do-i-need-tls-https)
+  - [7.2 Is opening port 80 a security risk?](#72-is-opening-port-80-a-security-risk)
+- [8. Deployment Architecture](#8-deployment-architecture)
+- [9. Implementation Steps](#9-implementation-steps)
+  - [Step 1 — Install Hugo](#step-1--install-hugo-extended-version)
+  - [Step 2 — Install Nginx](#step-2--install-nginx)
+  - [Step 3 — Add PaperMod as a Git Submodule](#step-3--add-papermod-as-a-git-submodule)
+  - [Step 4 — Hugo Configuration](#step-4--hugo-configuration)
+  - [Step 5 — Content Files](#step-5--content-files-already-done)
+  - [Step 6 — Local Preview](#step-6--local-preview)
+  - [Step 7 — Initial Build](#step-7--initial-build)
+  - [Step 8 — Configure Nginx](#step-8--configure-nginx)
+  - [Step 9 — VM Firewall](#step-9--vm-firewall)
+  - [Step 10 — DNS](#step-10--dns)
+  - [Step 11 — TLS Certificate](#step-11--tls-certificate-optional-but-recommended)
+- [10. How to Start the Website](#10-how-to-start-the-website)
+- [11. Updating Content (day-to-day workflow)](#11-updating-content-day-to-day-workflow)
+  - [Step 1 — Edit the Markdown file](#step-1--edit-the-markdown-file)
+  - [Step 2 — Rebuild the site](#step-2--rebuild-the-site)
+  - [Why the different build commands?](#why-the-different-build-commands)
+  - [Step 3 — Verify](#step-3--verify)
+- [12. Maintenance Cheat Sheet](#12-maintenance-cheat-sheet)
+- [13. Go-Live Checklist (DNS + TLS)](#13-go-live-checklist-dns--tls)
+  - [A — Set DNS records](#a--set-dns-records-cloudflare-dashboard)
+  - [B — Rebuild Hugo with the real domain](#b--rebuild-hugo-with-the-real-domain-http)
+  - [C — Run Certbot](#c--run-certbot-get-tls-certificate)
+  - [D — Switch Hugo to HTTPS and rebuild](#d--switch-hugo-to-https-and-rebuild)
+  - [E — Verify](#e--verify)
+
+---
+
 ## 1. Requirements Summary
 
 | # | Requirement | Notes |
@@ -41,7 +86,7 @@ Editing a page = opening one Markdown file and saving. No code changes needed.
 
 ## 3. Technology Options
 
-### Option A — Hugo ✅ SELECTED
+### Option A — Hugo SELECTED
 
 **What it is:** A static site generator written in Go. Converts Markdown → HTML at build time. Distributed as a single binary.
 
@@ -297,14 +342,22 @@ ufw enable
 ```
 
 ### Step 10 — DNS
-Log in to your domain registrar. Point the `hermanfreiman.com` A record to the Hetzner VM's public IP address. Propagation typically takes 5–60 minutes.
+Log in to Cloudflare. Point the `hermanfreiman.org` A records to the Hetzner VM's public IP address (`46.224.66.242`). Propagation typically takes 5–60 minutes.
+
+```
+hermanfreiman.org      A    46.224.66.242
+www.hermanfreiman.org  A    46.224.66.242
+```
+
+Verify propagation:
+```bash
+dig +short hermanfreiman.org A
+# should return: 46.224.66.242
+```
 
 ### Step 11 — TLS Certificate *(optional but recommended)*
 ```bash
-apt-get install -y certbot python3-certbot-nginx
-certbot --nginx -d hermanfreiman.com -d www.hermanfreiman.com
-# Also open the firewall for HTTPS:
-ufw allow 443/tcp
+certbot --nginx -d hermanfreiman.org -d www.hermanfreiman.org --non-interactive --agree-tos -m sfsharon@gmail.com
 ```
 Certbot auto-renews via a systemd timer — no manual action needed.
 
@@ -342,8 +395,10 @@ Run Hugo from the project directory. **Which command depends on DNS status:**
 | DNS situation | Build command |
 |---------------|--------------|
 | DNS not set up yet — testing via IP `46.224.66.242` | `hugo --minify -b http://46.224.66.242/` |
-| DNS live, HTTP only (`hermanfreiman.com` resolves) | `hugo --minify` |
-| DNS live + TLS active (after certbot) | Change `baseURL` in `hugo.toml` to `https://hermanfreiman.com/`, then `hugo --minify` |
+| DNS live, HTTP only (`hermanfreiman.org` resolves) | `hugo --minify` (baseURL in hugo.toml is `http://hermanfreiman.org/`) |
+| DNS live + TLS active (after certbot) | Change `baseURL` in `hugo.toml` to `https://hermanfreiman.org/`, then `hugo --minify` |
+
+**Important:** After certbot runs, the `https://` step is mandatory. Hugo bakes the baseURL into every nav link. If the links say `http://` while the site is served over `https://` (via Cloudflare), clicking any tab will cause a redirect loop or mixed-content failure.
 
 Hugo regenerates `public/` in under a second. Nginx immediately serves the updated files — no nginx restart needed.
 
@@ -368,10 +423,85 @@ curl -s -o /dev/null -w "%{http_code}" http://localhost/biography/
 | Rebuild (DNS ready, HTTP) | `cd /root/workspace/herman-freiman && hugo --minify` |
 | Live-preview while editing | `cd /root/workspace/herman-freiman && hugo server` → open `http://localhost:1313` (requires `-L 1313:localhost:1313` in SSH command) |
 | Add a photo | Copy to `static/photos/`, add `{{</* figure */>}}` shortcode in `gallery.md`, rebuild |
-| Switch to HTTPS after certbot | Edit `baseURL` in `hugo.toml` → `https://hermanfreiman.com/`, then `hugo --minify` |
+| Switch to HTTPS after certbot | Edit `baseURL` in `hugo.toml` → `https://hermanfreiman.org/`, then `hugo --minify` |
 | TLS renewal | Automatic — certbot systemd timer handles it, no action needed |
 
 ---
 
-*Document status: **Deployed. DNS and TLS pending.***
+---
+
+## 13. Go-Live Checklist (DNS + TLS)
+
+Run these steps in order once the domain `hermanfreiman.org` is registered on Cloudflare.
+
+### A — Set DNS records (Cloudflare dashboard)
+```
+hermanfreiman.org      A    46.224.66.242
+www.hermanfreiman.org  A    46.224.66.242
+```
+Wait for propagation (5–60 min), then verify:
+```bash
+dig +short hermanfreiman.org A
+# must return 46.224.66.242 before continuing
+```
+
+### B — Rebuild Hugo with the real domain (HTTP)
+```bash
+cd /root/workspace/herman-freiman
+hugo --minify
+```
+`hugo.toml` already has `baseURL = "http://hermanfreiman.org/"` — no edit needed.
+
+Test it:
+```bash
+curl -s -o /dev/null -w "%{http_code}" http://hermanfreiman.org/
+# should return 200
+```
+
+### C — Run Certbot (get TLS certificate)
+```bash
+certbot --nginx -d hermanfreiman.org -d www.hermanfreiman.org \
+  --non-interactive --agree-tos -m sfsharon@gmail.com
+ufw allow 443/tcp
+```
+Certbot edits the nginx config automatically to add HTTPS and redirect HTTP → HTTPS.
+
+**Post-certbot fix required.** Certbot replaces the HTTP block with one that returns `404` for any request whose `Host` header is not the domain name. This breaks direct IP access and any relative links clicked while browsing via the IP. After certbot runs, fix the HTTP block in `/etc/nginx/sites-available/hermanfreiman.org`:
+
+Change:
+```nginx
+    listen 80;
+    listen [::]:80;
+    server_name hermanfreiman.org www.hermanfreiman.org;
+    return 404; # managed by Certbot
+```
+To:
+```nginx
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name hermanfreiman.org www.hermanfreiman.org _;
+    return 301 https://hermanfreiman.org$request_uri;
+```
+Then reload nginx:
+```bash
+nginx -t && systemctl reload nginx
+```
+This ensures any direct IP request redirects cleanly to the domain instead of 404-ing.
+
+### D — Switch Hugo to HTTPS and rebuild
+Edit `hugo.toml`:
+```toml
+baseURL = "https://hermanfreiman.org/"
+```
+Then rebuild:
+```bash
+hugo --minify
+```
+
+### E — Verify
+Open `https://hermanfreiman.org` in your phone browser. Check the padlock icon is shown. Navigate through all menu tabs to confirm everything works.
+
+---
+
+*Document status: **Deployed via IP. Domain: hermanfreiman.org (pending registration). DNS and TLS pending.***
 *Last updated: June 2026*

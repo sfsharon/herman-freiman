@@ -11,6 +11,7 @@ For infrastructure, deployment, and build operations see [website_infrastructure
   - [1.1 The Narrow Column Problem](#11-the-narrow-column-problem)
   - [1.2 The Blog-Aesthetic Problem](#12-the-blog-aesthetic-problem)
   - [1.3 The Home Page Problem](#13-the-home-page-problem)
+  - [1.4 Markdown Is Not the Main Problem](#14-markdown-is-not-the-main-problem)
 - [2. Design Vision](#2-design-vision)
   - [2.1 The Feeling We Want](#21-the-feeling-we-want)
   - [2.2 Key Visual Elements](#22-key-visual-elements)
@@ -24,13 +25,14 @@ For infrastructure, deployment, and build operations see [website_infrastructure
   - [4.3 Typography](#43-typography)
   - [4.4 Photo Card Grid (Home Page)](#44-photo-card-grid-home-page)
   - [4.5 Inner Pages](#45-inner-pages)
+  - [4.6 Future Hebrew Version](#46-future-hebrew-version)
 - [5. Implementation Options](#5-implementation-options)
   - [Option A: Customize PaperMod — CSS override + custom home layout](#option-a-customize-papermod--css-override--custom-home-layout)
   - [Option B: Replace PaperMod with a Hugo custom theme](#option-b-replace-papermod-with-a-hugo-custom-theme)
   - [Option C: Migrate to Astro framework](#option-c-migrate-to-astro-framework)
   - [Option D: Pure HTML landing page, Hugo for inner pages](#option-d-pure-html-landing-page-hugo-for-inner-pages)
 - [6. Recommendation](#6-recommendation)
-- [7. Implementing the Recommendation (Option A)](#7-implementing-the-recommendation-option-a)
+- [7. Fallback Hugo Implementation (Option A)](#7-fallback-hugo-implementation-option-a)
   - [7.1 Step 1 — Widen the content area](#71-step-1--widen-the-content-area)
   - [7.2 Step 2 — Create the signature header](#72-step-2--create-the-signature-header)
   - [7.3 Step 3 — Replace the home page with a photo-card grid](#73-step-3--replace-the-home-page-with-a-photo-card-grid)
@@ -41,7 +43,7 @@ For infrastructure, deployment, and build operations see [website_infrastructure
 
 ## 1. Problem Diagnosis
 
-The site works correctly but it looks like printed Markdown. Three distinct problems cause this.
+The site works correctly but it looks like printed Markdown. Four distinct problems cause this.
 
 ### 1.1 The Narrow Column Problem
 
@@ -62,6 +64,20 @@ PaperMod is a blog theme. It is beautifully designed for one thing: displaying l
 The current home page is PaperMod's default "profile mode" — a centred text block with a cover image above it. This is the standard blog landing page. For a memorial, the home page is the most important page: it should immediately convey who Herman was through photographs, create a feeling of solemnity and weight, and invite the visitor to explore.
 
 Currently it does none of these.
+
+### 1.4 Markdown Is Not the Main Problem
+
+The current weakness does not come from using Markdown as the content source. Markdown is still a good format for biography text, document notes, historical context, captions, and research updates. It keeps the material editable and avoids mixing content with layout code.
+
+The problem is that the Markdown is currently being rendered almost one-to-one as article content. The website needs a designed presentation layer between the source material and the visitor:
+
+- A curated home page, not a rendered document
+- Visual section entries, not only text links
+- Larger image-led blocks where the photographs carry the story
+- Custom layouts for special pages such as Gallery, Timeline, Documents, and Family Tree
+- Wider containers and full-width page sections where appropriate
+
+In other words: keep Markdown for the archive, but stop letting the default theme decide the experience.
 
 ---
 
@@ -91,6 +107,8 @@ The emotional register is quiet, serious, respectful — not dramatic or graphic
 
 The United States Holocaust Memorial Museum website (ushmm.org) is the most direct reference for the aesthetic we want.
 
+The important lesson from USHMM is not a specific framework or technology. It is that the site behaves like a curated public-history experience rather than a document repository. The homepage gives visitors visual choices, story pathways, current/featured material, and institutional orientation before asking them to read long text.
+
 ### 3.1 What Makes USHMM Work
 
 | Element | What they do |
@@ -102,6 +120,8 @@ The United States Holocaust Memorial Museum website (ushmm.org) is the most dire
 | **Typography** | Serif headlines (weight and dignity), sans-serif body text (readability). |
 | **Color restraint** | Near-black, white, and one muted accent color. No decorative gradients, no cheerful colors. |
 | **Historical photographs** | Photos are given real estate. They are not small thumbnails — they are allowed to be large and visible. |
+| **Curated entry paths** | Visitors are guided into major areas through prominent visual modules rather than a plain list of pages. |
+| **Content blocks** | The home page is assembled from designed sections: featured story, learning path, collection prompt, news/event cards, and calls to explore. |
 
 ### 3.2 What to Borrow
 
@@ -109,11 +129,15 @@ The United States Holocaust Memorial Museum website (ushmm.org) is the most dire
 - Card-based navigation on the home page, where each card is a photograph + section title
 - Generous padding and contained-width sections (not 720px columns but sensible 1100–1200px containers)
 - Restrained palette: near-black, off-white, and one warm accent (parchment, sepia, or deep red)
+- A homepage that acts as a gateway into the story: Biography, Timeline, Gallery, Documents, Historical Context, and Open Questions
+- Occasional featured artifacts or photographs near the top of the page, so the archival material is visible before the visitor chooses a section
 
 ### 3.3 What to Avoid
 
 - USHMM has heavy institutional navigation with many subsections. This site is small and personal — keep the nav simple.
 - USHMM uses the dark header across the entire site. For a personal family memorial, a dark header on only the home page (with lighter inner pages) may feel more appropriate.
+- Do not copy the institutional scale of USHMM. Herman Freiman's site should feel personal, familial, and intimate, not like a museum department.
+- Do not turn the page into a marketing-style landing page. The subject needs dignity, restraint, and evidence-led storytelling.
 
 ---
 
@@ -155,7 +179,19 @@ All fonts are available free from Google Fonts and can be self-hosted (no extern
 
 ### 4.4 Photo Card Grid (Home Page)
 
-The home page should replace the current text block with a 2×3 (or 2×4) grid of cards. Each card represents one section of the site:
+The home page should replace the current text block with a designed gateway. The visitor should not feel they are reading the first Markdown file in a folder; they should feel they have entered a small curated archive.
+
+Recommended home page order:
+
+1. **Signature masthead** — Herman's modified signature appears as a personal visual mark at the top of the site.
+2. **Human opening line** — short, concrete, and story-led.
+3. **Portrait or family image** — one strong photograph above or beside the opening text.
+4. **Section cards** — visual links into the main parts of the archive.
+5. **Short timeline strip** — 4–5 major life milestones.
+6. **Featured artifact** — one document or photograph with a caption and a link to Documents or Gallery.
+7. **About this site** — a brief note that this is a family research and remembrance project.
+
+The section-card area should use a 2×3 (or 2×4) grid. Each card represents one section of the site:
 
 | Card | Photograph | Section |
 |------|-----------|---------|
@@ -168,7 +204,13 @@ The home page should replace the current text block with a 2×3 (or 2×4) grid o
 
 Each card: full-width photo, title overlay at bottom, hover effect (slight zoom or dim+text). Clicking the card navigates to the section.
 
-Above the card grid: a brief dedication — his name in large serif type (both Latin and Hebrew), birth–death years, and 2–3 sentences of introduction.
+Above the card grid: a brief dedication — his name in large serif type (both Latin and Hebrew), birth and major life locations, and 2–3 sentences of introduction.
+
+Suggested opening line:
+
+> Herman Zvi Freiman was born in Boryslaw in 1910. His wife and children did not survive the Holocaust. He did.
+
+That sentence is emotionally direct without being theatrical. It gives the visitor a reason to continue, then the site can move into the documentary record.
 
 ### 4.5 Inner Pages
 
@@ -179,6 +221,45 @@ Inner pages (Biography, Timeline, Gallery, etc.) benefit from a wider content ar
 - Keep the clean sans-serif body text
 - Allow images to span full content width (not constrained to inline)
 - Tables styled with parchment stripe rows instead of default gray
+
+Some pages should eventually get custom layouts rather than generic article rendering:
+
+| Page | Recommended treatment |
+|------|-----------------------|
+| Biography | Narrative article with portrait, pull quote, and source callouts |
+| Timeline | Visual chronological blocks instead of plain tables only |
+| Gallery | Image-first grid with captions that identify people, place, and approximate year |
+| Documents | Archival cards with source, date, document type, transcription, and translation |
+| Family Tree | Designed tree or relationship layout instead of ASCII text |
+| Research Notes | Consider renaming to **Open Questions** or **Unresolved Questions** |
+
+### 4.6 Future Hebrew Version
+
+The site should eventually support a full Hebrew version, not just isolated Hebrew names or phrases. This does not need to be implemented in the first redesign phase, but the design and technical choices should allow for it.
+
+Future Hebrew support means:
+
+- A complete Hebrew translation of every page
+- Right-to-left page direction for Hebrew pages
+- Hebrew navigation labels
+- Hebrew typography that feels intentional, not like a fallback font
+- Correct layout mirroring where appropriate: navigation, timelines, captions, document metadata, and page-level reading flow
+- A visible language switcher between English and Hebrew
+- Separate URLs for each language, for example `/en/biography/` and `/he/biography/`, or English at `/biography/` and Hebrew at `/he/biography/`
+
+Design implications:
+
+- Avoid layouts that only work left-to-right.
+- Avoid embedding English text directly into templates where it cannot be translated.
+- Keep card titles, navigation labels, button text, and section headings data-driven where possible.
+- Choose font stacks with high-quality Hebrew support. For Hebrew headings, `Noto Serif Hebrew`, `David Libre`, or another purpose-selected Hebrew serif should be tested visually.
+- Test mixed English/Hebrew text carefully, especially names, dates, archive identifiers, and document citations.
+
+Technology implications:
+
+- Hugo can support multilingual sites, so keeping Hugo does not block future Hebrew translation.
+- Astro can also support multilingual routing, so a future migration remains compatible with this requirement.
+- The important decision is to keep content and labels structured enough that English and Hebrew versions can diverge naturally where translation requires different sentence order, page rhythm, or caption length.
 
 ---
 
@@ -247,6 +328,7 @@ Astro reads the existing `.md` files directly (with minor frontmatter adjustment
 - Component model (Header, Card, HeroSection) makes the design coherent and maintainable
 - Tailwind CSS makes the USHMM-style design achievable in hours
 - Large ecosystem of visual themes and components
+- Good fit for future full Hebrew support through language-specific routes, shared components, and localized content collections
 
 **Cons:**
 - Requires Node.js (install on the VM: `apt install nodejs npm`)
@@ -281,23 +363,33 @@ Hugo does not generate `index.html` from `content/_index.md` if you place a stat
 
 ## 6. Recommendation
 
-**Start with Option A.**
+**Move to Astro.**
 
-The home page is the highest-impact change and Option A delivers it with the lowest risk. The inner pages already serve their purpose — the Biography page with its identification table, the Timeline with its chronological tables — these are document-style pages and document-style layout is appropriate. The problem is specifically the home page and the narrow column.
+The current site needs a stronger presentation layer than PaperMod can comfortably provide. The problem is still not Markdown itself; the problem is that Hugo + PaperMod is rendering the content too much like article pages. Astro keeps the useful parts of a static content workflow while making it much easier to build a designed, image-led, component-based memorial site.
 
-With Option A you can achieve the full USHMM-inspired design:
-- Custom home page with signature watermark header, full-width photo cards, proper typography
-- Widened inner pages (960px instead of 720px)
-- The sepia/parchment color palette applied site-wide
-- No migration, no new tools, no risk to the working infrastructure
+Astro is the better direction for this project because:
 
-If after implementing Option A the inner pages still feel unsatisfying and you want total design control, migrating to Astro (Option C) remains on the table — and by then you will have a clear picture of exactly what design you want, which makes the Astro migration faster.
+- The homepage can be built as a real visual composition, not as a themed Markdown page.
+- Components such as `Hero`, `SignatureHeader`, `SectionCard`, `TimelineStrip`, `ArtifactCard`, and `LanguageSwitcher` can be reused across the site.
+- Markdown or MDX can still be used for long-form content, captions, source notes, and document descriptions.
+- Future Hebrew support can be planned from the start with localized routes, RTL layouts, translated navigation, and shared bilingual components.
+- The final output is still static HTML/CSS/JS, so nginx deployment remains conceptually simple.
+
+This is the recommended sequence:
+
+1. **Phase 1 — Astro scaffold:** Create the Astro project structure, routing, layout shell, global CSS, and image handling.
+2. **Phase 2 — Visual homepage:** Build the signature masthead, portrait-led introduction, section cards, short timeline strip, featured artifact, and About section.
+3. **Phase 3 — Content migration:** Move the existing Markdown content into Astro content collections or MDX pages, preserving source material and captions.
+4. **Phase 4 — Custom page layouts:** Build designed pages for Gallery, Timeline, Documents, Biography, Family Tree, History, and Open Questions.
+5. **Phase 5 — Future Hebrew readiness:** Structure routes, components, labels, and typography so a full Hebrew version can be added later without redesigning the site.
+
+Option A remains a fallback if migration effort must be minimized, but it is no longer the recommended direction.
 
 ---
 
-## 7. Implementing the Recommendation (Option A)
+## 7. Fallback Hugo Implementation (Option A)
 
-The following steps implement the design vision using Hugo + PaperMod customization.
+The following steps describe the lower-effort fallback path using Hugo + PaperMod customization. This is useful if the Astro migration is postponed, but it is not the preferred long-term direction.
 
 ### 7.1 Step 1 — Widen the content area
 
@@ -697,11 +789,11 @@ hugo server --bind 0.0.0.0 --port 8080 --baseURL http://localhost:8080
 
 Then open `http://localhost:8080` in a browser (via the SSH tunnel already established on port 8080).
 
-To load the EB Garamond font, add to `layouts/partials/head.html` (another PaperMod override):
+To load the EB Garamond font, either self-host the font files or override PaperMod's head partial carefully.
+
+Do not create a new `layouts/partials/head.html` that simply calls `partial "head.html"` again; that can recurse into itself. Instead, copy the original `themes/PaperMod/layouts/partials/head.html` into `layouts/partials/head.html` and add the font links near the end of the copied file:
 
 ```html
-<!-- layouts/partials/head.html -->
-{{- partial "head.html" (dict "Site" .Site "Params" .Params "IsHome" .IsHome "Title" .Title) }}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 ```

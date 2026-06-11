@@ -43,7 +43,9 @@ For infrastructure, deployment, and build operations see [website_infrastructure
 
 ## 1. Problem Diagnosis
 
-The site works correctly but it looks like printed Markdown. Four distinct problems cause this.
+*This section documents why the original Hugo + PaperMod implementation was replaced by Astro. It is kept as context for the design decisions made. The problems described here no longer exist in the current Astro build.*
+
+The original site worked correctly but looked like printed Markdown. Four distinct problems caused this.
 
 ### 1.1 The Narrow Column Problem
 
@@ -214,13 +216,13 @@ That sentence is emotionally direct without being theatrical. It gives the visit
 
 ### 4.5 Inner Pages
 
-Inner pages (Biography, Timeline, Gallery, etc.) benefit from a wider content area than PaperMod's 720px default, but they do not need the full dramatic treatment of the home page. Recommended changes for inner pages:
+Inner pages (Biography, Timeline, Gallery, etc.) have a 960px content area (set via `--content-width` in `global.css`) and do not need the full dramatic treatment of the home page. Future improvements for inner pages:
 
-- Widen to 960–1100px content area
-- Remove the "reading time", "word count", breadcrumb clutter
-- Keep the clean sans-serif body text
-- Allow images to span full content width (not constrained to inline)
-- Tables styled with parchment stripe rows instead of default gray
+- ✅ 960px content area (already set in `global.css`)
+- ✅ No blog chrome (no reading time, word count, breadcrumbs — Astro has none by default)
+- ✅ Clean sans-serif body text
+- Allow images to span full content width where appropriate (Phase 4)
+- Tables styled with parchment stripe rows — defined in `global.css .prose table` (Phase 3+)
 
 Some pages should eventually get custom layouts rather than generic article rendering:
 
@@ -257,19 +259,19 @@ Design implications:
 
 Technology implications:
 
-- Hugo can support multilingual sites, so keeping Hugo does not block future Hebrew translation.
-- Astro can also support multilingual routing, so a future migration remains compatible with this requirement.
+- Astro supports multilingual routing natively, so future Hebrew support does not require a framework change.
 - The important decision is to keep content and labels structured enough that English and Hebrew versions can diverge naturally where translation requires different sentence order, page rhythm, or caption length.
+- Navigation labels, card titles, and button text in Astro components should be kept as variables or props rather than hardcoded strings, so they can be swapped per language.
 
 ---
 
 ## 5. Implementation Options
 
-Four approaches are available, ranging from minimal change to full replacement.
+*These options were evaluated before the Astro migration. Option C was selected and implemented. Options A, B, and D are kept here as historical context.*
 
 ---
 
-### Option A: Customize PaperMod — CSS override + custom home layout
+### Option A: Customize PaperMod — CSS override + custom home layout *(not taken)*
 
 **What it means:** Keep Hugo and PaperMod. Override PaperMod's CSS via Hugo's custom CSS extension point (`assets/css/extended/custom.css`). Replace only the home page template with a custom `layouts/index.html`.
 
@@ -295,7 +297,7 @@ Four approaches are available, ranging from minimal change to full replacement.
 
 ---
 
-### Option B: Replace PaperMod with a Hugo custom theme
+### Option B: Replace PaperMod with a Hugo custom theme *(not taken)*
 
 **What it means:** Remove PaperMod. Write a minimal Hugo theme from scratch in `themes/herman/` with full HTML control over every page.
 
@@ -314,32 +316,31 @@ Hugo's templating system builds pages from `layouts/` files. A theme is just a s
 
 ---
 
-### Option C: Migrate to Astro framework
+### Option C: Migrate to Astro framework *(selected — implemented June 2026)*
 
 **What it means:** Replace Hugo with [Astro](https://astro.build/), a modern static site generator designed for content-heavy, visually rich sites.
 
-**How it works:**
-Astro reads the existing `.md` files directly (with minor frontmatter adjustments). Pages are built from `.astro` component files which are HTML + JavaScript components. You can use any CSS framework (Tailwind CSS is the most common). The build output is the same — a `dist/` folder of static HTML that nginx serves identically.
+**What was actually built (Phase 1):**
+Pages are `.astro` component files (HTML + scoped logic). The existing `content/*.md` files from Hugo are **not yet connected** — Phase 1 created stub pages with placeholder text. The Markdown content will be migrated into the Astro pages in Phase 3. Styling is done with plain CSS (`src/styles/global.css`) using CSS custom properties for the design tokens — no CSS framework was added. The build output is a `dist/` folder of static HTML that nginx serves identically to before.
 
-**Effort:** 1–2 weeks to migrate. Requires learning Astro's template syntax (simpler than React). Hugo build command (`hugo --minify`) is replaced by `npx astro build`.
+**Build command:** `npm run build` (replaces `hugo --minify`)
+**Dev server:** `npm run dev` (port 8080, replaces `hugo server`)
 
 **Pros:**
-- Purpose-built for visually rich content sites
-- Component model (Header, Card, HeroSection) makes the design coherent and maintainable
-- Tailwind CSS makes the USHMM-style design achievable in hours
-- Large ecosystem of visual themes and components
-- Good fit for future full Hebrew support through language-specific routes, shared components, and localized content collections
+- Full HTML/CSS control over every page — no theme constraints
+- Component model (`Header.astro`, `BaseLayout.astro`, etc.) keeps design consistent across pages
+- The `content/*.md` files can be imported as Astro content collections in Phase 3, preserving the edit-Markdown workflow
+- Good fit for future Hebrew support through language-specific routes and shared bilingual components
 
 **Cons:**
-- Requires Node.js (install on the VM: `apt install nodejs npm`)
-- Learning curve for Astro templates
-- The entire build pipeline changes — the infrastructure document must be rewritten for the new build command
-- `.md` frontmatter may need adjustments (Hugo's `{{< figure >}}` shortcodes do not exist in Astro)
+- Node.js required (already present on the VM)
+- The `content/*.md` files need Hugo shortcodes replaced before they can be used in Astro (Phase 3 work)
+- Build pipeline changed — infrastructure document updated to reflect this
 - Significantly more complex than Hugo for what remains a small, static site
 
 ---
 
-### Option D: Pure HTML landing page, Hugo for inner pages
+### Option D: Pure HTML landing page, Hugo for inner pages *(not taken)*
 
 **What it means:** Write the home page (`public/index.html`) as a standalone HTML + CSS file, hand-crafted. Hugo continues to serve all inner pages unchanged.
 
@@ -400,9 +401,11 @@ Option A (Hugo + PaperMod CSS override) is no longer relevant — the migration 
 
 ---
 
-## 7. Fallback Hugo Implementation (Option A)
+## 7. Hugo Implementation Reference *(historical — Hugo removed)*
 
-The following steps describe the lower-effort fallback path using Hugo + PaperMod customization. This is useful if the Astro migration is postponed, but it is not the preferred long-term direction.
+> Hugo and PaperMod were removed in June 2026. This section is kept as a record of what was built before the Astro migration. The code below no longer applies to the current project.
+
+The following steps described the lower-effort fallback path using Hugo + PaperMod customization.
 
 ### 7.1 Step 1 — Widen the content area
 

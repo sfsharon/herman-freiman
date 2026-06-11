@@ -13,12 +13,12 @@
 - [1. Requirements Summary](#1-requirements-summary)
 - [2. Proposed Site Structure](#2-proposed-site-structure)
 - [3. Technology Options](#3-technology-options)
-  - [Option A — Hugo SELECTED](#option-a--hugo-selected)
+  - [Option A — Hugo (initial choice, superseded)](#option-a--hugo-initial-choice-superseded)
   - [Option B — Eleventy (11ty)](#option-b--eleventy-11ty-not-selected)
-  - [Option C — Astro](#option-c--astro-not-selected)
+  - [Option C — Astro (current)](#option-c--astro-current)
   - [Option D — Plain HTML + Pandoc](#option-d--plain-html--pandoc-not-selected)
 - [4. Comparison Matrix](#4-comparison-matrix)
-- [5. Selected Option: Hugo + PaperMod](#5-selected-option-hugo--papermod)
+- [5. Selected Option: Astro](#5-selected-option-astro)
 - [6. Content Architecture](#6-content-architecture)
   - [Page Map](#page-map)
 - [7. Security & Exposure](#7-security--exposure)
@@ -26,11 +26,11 @@
   - [7.2 Is opening port 80 a security risk?](#72-is-opening-port-80-a-security-risk)
 - [8. Deployment Architecture](#8-deployment-architecture)
 - [9. Implementation Steps](#9-implementation-steps)
-  - [Step 1 — Install Hugo](#step-1--install-hugo-extended-version)
+  - [Step 1 — Verify Node.js](#step-1--verify-nodejs)
   - [Step 2 — Install Nginx](#step-2--install-nginx)
-  - [Step 3 — Add PaperMod as a Git Submodule](#step-3--add-papermod-as-a-git-submodule)
-  - [Step 4 — Hugo Configuration](#step-4--hugo-configuration)
-  - [Step 5 — Content Files](#step-5--content-files-already-done)
+  - [Step 3 — Install Astro dependencies](#step-3--install-astro-dependencies)
+  - [Step 4 — Astro Configuration](#step-4--astro-configuration)
+  - [Step 5 — Source Files](#step-5--source-files-already-done)
   - [Step 6 — Local Preview](#step-6--local-preview)
   - [Step 7 — Initial Build](#step-7--initial-build)
   - [Step 8 — Configure Nginx](#step-8--configure-nginx)
@@ -46,9 +46,9 @@
 - [12. Maintenance Cheat Sheet](#12-maintenance-cheat-sheet)
 - [13. Go-Live Checklist (DNS + TLS)](#13-go-live-checklist-dns--tls)
   - [A — Set DNS records](#a--set-dns-records-cloudflare-dashboard)
-  - [B — Rebuild Hugo with the real domain](#b--rebuild-hugo-with-the-real-domain-http)
+  - [B — Build the Astro site](#b--build-the-astro-site)
   - [C — Run Certbot](#c--run-certbot-get-tls-certificate)
-  - [D — Switch Hugo to HTTPS and rebuild](#d--switch-hugo-to-https-and-rebuild)
+  - [D — Verify HTTPS](#d--verify-https)
   - [E — Verify](#e--verify)
 
 ---
@@ -89,29 +89,15 @@ Editing a page = opening one Markdown file and saving. No code changes needed.
 
 ## 3. Technology Options
 
-### Option A — Hugo SELECTED
+### Option A — Hugo *(initial choice, superseded)*
 
-**What it is:** A static site generator written in Go. Converts Markdown → HTML at build time. Distributed as a single binary.
+Hugo with the PaperMod theme was the original implementation. It was replaced by Astro in June 2026 because PaperMod's document-oriented layout and 720px content width could not deliver the memorial-site visual design without extensive fighting against the theme. See `website_design.md` §1 for the full diagnosis.
 
 | | |
 |-|-|
-| **Language** | Go (single self-contained binary, no runtime to manage) |
-| **Build time** | < 1 second for a site this size |
-| **Markdown support** | Native; front-matter (YAML/TOML) per file |
-| **Theme** | PaperMod — minimal, clean, fully responsive |
-| **Serving** | Build output is plain HTML/CSS/JS → served by nginx |
-| **Maintenance** | Edit `.md` file → run `hugo` → nginx serves updated files |
-
-**Pros**
-- No Node.js/Python needed at build or serve time — single binary
-- Fastest build of any option
-- PaperMod theme is dignified, uncluttered, and mobile-first out of the box
-- Native image processing handles the photo gallery
-- Excellent multilingual support (useful if Hebrew sections grow)
-
-**Cons**
-- Go templating syntax (`{{ .Title }}`) takes some getting used to
-- Less flexible if interactive components are ever needed
+| **Language** | Go (single self-contained binary) |
+| **Build time** | < 1 second |
+| **Status** | **Removed** — `hugo.toml` and `themes/PaperMod` deleted |
 
 ---
 
@@ -119,9 +105,9 @@ Editing a page = opening one Markdown file and saving. No code changes needed.
 
 Node.js SSG, highly flexible, mostly DIY CSS/layout. ~4–6 hours of setup effort due to no ready-made theme that suits this content.
 
-### Option C — Astro *(not selected)*
+### Option C — Astro *(current)*
 
-Modern Node.js, content-first, zero JS shipped to browser. Good option but newer/more complex than needed for a temporary family site.
+Modern Node.js static site generator, content-first, zero JS shipped to browser by default. Selected in June 2026 as the replacement for Hugo. See §5 for rationale.
 
 ### Option D — Plain HTML + Pandoc *(not selected)*
 
@@ -131,27 +117,28 @@ Absolute minimal dependencies but requires all CSS/layout work by hand. ~5–8 h
 
 ## 4. Comparison Matrix
 
-| Criterion | **Hugo** | Eleventy | Astro | Pandoc+HTML |
+| Criterion | Hugo (removed) | Eleventy | **Astro (current)** | Pandoc+HTML |
 |-----------|----------|----------|-------|-------------|
-| Setup speed | **Fast** | Medium | Medium | Fast |
-| Markdown → pages | **Automatic** | Automatic | Automatic | Manual script |
-| Polished theme available | **Yes** | Partial | Yes | No |
-| Node.js dependency | **No** | Yes | Yes | No |
-| Responsive out of box | **Yes (PaperMod)** | Manual | Theme-dep. | Manual |
-| Photo gallery | **Built-in shortcode** | Manual | Manual | Manual |
-| Admin editing | **Edit MD + `hugo`** | Edit MD + npx | Edit MD + npm | Edit MD + script |
-| Long-term maintainability | **High** | High | Medium-High | Medium |
+| Setup speed | Fast | Medium | **Medium** | Fast |
+| Markdown → pages | Automatic | Automatic | **Automatic** | Manual script |
+| Polished theme available | Yes (PaperMod) | Partial | **Custom (built)** | No |
+| Node.js dependency | No | Yes | **Yes** | No |
+| Responsive out of box | Yes | Manual | **Yes (custom CSS)** | Manual |
+| Full design control | Limited | High | **High** | Full |
+| Admin editing | Edit MD + hugo | Edit MD + npx | **Edit .astro + npm run build** | Edit MD + script |
+| Long-term maintainability | High | High | **High** | Medium |
 
 ---
 
-## 5. Selected Option: Hugo + PaperMod
+## 5. Selected Option: Astro
 
-**Hugo** with the **PaperMod** theme was selected. Rationale:
+**Astro** (v4) is the current framework. It replaced Hugo + PaperMod in June 2026. Rationale:
 
-- PaperMod renders cleanly on mobile and large screens (requirements 1 & 2) with a dignified, minimal aesthetic appropriate for a memorial site.
-- The fastest path from "edit a Markdown file" to "website updated" (requirement 5).
-- Single binary — no runtime process running on the VM; nginx serves pre-built static files only.
-- Native image processing and `figure` shortcodes handle the family photo gallery.
+- PaperMod's document-oriented layout and hard 720px content width made the memorial-site visual design impossible to achieve without rewriting the theme from scratch.
+- Astro gives full HTML/CSS control over every page while keeping the same static-output workflow (build → nginx serves files).
+- The component model (`Header.astro`, `BaseLayout.astro`, etc.) keeps the design consistent and maintainable as pages are built out.
+- Supports future Hebrew/multilingual routing without a full rewrite.
+- Build output is plain HTML/CSS/JS in `dist/` — nginx configuration is unchanged except for the `root` directory path.
 
 ---
 
@@ -283,49 +270,52 @@ The git repository at `/root/workspace/herman-freiman/` is the Astro project roo
 
 ## 9. Implementation Steps
 
-### Step 1 — Install Hugo (extended version)
+### Step 1 — Verify Node.js
+Node.js v22 is already present on the VM. Verify:
 ```bash
-# Check if apt version is recent enough (need v0.112+)
-apt-get install -y hugo
-hugo version
-
-# If the apt version is older than v0.112, download the latest binary instead:
-# wget https://github.com/gohugoio/hugo/releases/latest/download/hugo_extended_X.Y.Z_linux-amd64.deb
-# dpkg -i hugo_extended_*.deb
+node --version   # should print v22.x.x
+npm --version    # should print 10.x.x
 ```
+If missing: `apt-get install -y nodejs npm`
 
 ### Step 2 — Install Nginx
 ```bash
 apt-get install -y nginx
 ```
 
-### Step 3 — Add PaperMod as a Git Submodule
+### Step 3 — Install Astro dependencies
 ```bash
-# Run from the existing repo root — no git init needed
 cd /root/workspace/herman-freiman
-git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod themes/PaperMod
-git submodule update --init --recursive
+npm install
 ```
+This reads `package.json` and installs Astro (and any future dependencies) into `node_modules/`. Run this once after cloning, and again after any `package.json` change.
 
-### Step 4 — Hugo Configuration
-`hugo.toml` is already created in the repo root. Review and adjust `baseURL` to match the final domain.
+### Step 4 — Astro Configuration
+`astro.config.mjs` is in the repo root. The only field normally needed is `site`:
+```js
+// astro.config.mjs
+export default defineConfig({
+  site: 'https://hermanfreiman.org',
+});
+```
+Unlike Hugo, Astro does **not** bake the domain URL into navigation links — internal links use root-relative paths (`/biography/`). No rebuild is needed when switching between HTTP and HTTPS.
 
-### Step 5 — Content Files *(already done)*
-All eight `content/*.md` files are created and populated. `static/photos/` contains all family photographs.
+### Step 5 — Source Files *(already done)*
+All Astro source files are in `src/`. Family photographs are in `public/photos/`.
 
 ### Step 6 — Local Preview
 ```bash
 cd /root/workspace/herman-freiman
-hugo server        # live preview at http://localhost:1313
+npm run dev
 ```
-Review all pages on desktop and mobile (browser dev tools). Check Hebrew text rendering.
+Opens a dev server at `http://localhost:8080` (SSH tunnel `-L 8080:localhost:8080` already configured). Hot-reloads on every file save.
 
 ### Step 7 — Initial Build
 ```bash
 cd /root/workspace/herman-freiman
-hugo --minify
+npm run build
 ```
-This generates `public/`. Verify `public/index.html` exists.
+Generates `dist/`. Verify `dist/index.html` exists.
 
 ### Step 8 — Configure Nginx
 Create `/etc/nginx/sites-available/hermanfreiman.com`:
@@ -405,14 +395,35 @@ The site is served from `/root/workspace/herman-freiman/dist/`. Nginx reads that
 
 ## 11. Updating Content (day-to-day workflow)
 
+> **Important — current state (Phase 1):**
+> The `content/` folder contains Markdown files from the original Hugo site. These files are **not connected to the live website** and editing them has no effect on what visitors see. They are an archive held for Phase 3 migration.
+>
+> The live website is built entirely from `src/pages/*.astro`. To change what appears on a page, edit the relevant file in `src/pages/`.
+
 ### Step 1 — Edit the source file
 
-During Phase 1–2, pages are Astro files in `src/pages/`:
+Each page maps to one file:
+
+| Page | File to edit |
+|------|-------------|
+| Home | `src/pages/index.astro` |
+| Biography | `src/pages/biography.astro` |
+| Timeline | `src/pages/timeline.astro` |
+| Family Tree | `src/pages/family.astro` |
+| Gallery | `src/pages/gallery.astro` |
+| Documents | `src/pages/documents.astro` |
+| History | `src/pages/history.astro` |
+| Research Notes | `src/pages/research.astro` |
+| Header / navigation | `src/components/Header.astro` |
+| Footer | `src/components/Footer.astro` |
+| Colors, fonts, spacing | `src/styles/global.css` |
+
+Example:
 ```bash
 nano /root/workspace/herman-freiman/src/pages/biography.astro
 ```
 
-During Phase 3+, content will be in Markdown files imported by the Astro pages. The exact path will be documented when Phase 3 is implemented.
+After Phase 3 (content migration), the biographical text will live in Markdown files that are imported by the `.astro` pages. At that point this table will be updated with the Markdown file paths.
 
 ### Step 2 — Preview locally (optional)
 
@@ -447,14 +458,13 @@ Should print: `<title>Biography — Herman (Zvi) Freiman</title>`
 | Task | Command |
 |------|---------|
 | Check site is up | `systemctl status nginx` |
-| Edit a page | `nano src/pages/<page>.astro` |
+| Edit a page | `nano src/pages/<page>.astro` (NOT content/ — see §11) |
 | Live-preview while editing | `cd /root/workspace/herman-freiman && npm run dev` → open `http://localhost:8080` (SSH tunnel already on port 8080) |
 | Build for production | `cd /root/workspace/herman-freiman && npm run build` |
 | Add a photo | Copy to `public/photos/`, reference as `/photos/filename.ext` in any Astro page, rebuild |
 | Check nginx is serving | `curl -sk -H "Host: hermanfreiman.org" https://localhost/ \| grep "<title>"` |
 | Reload nginx after config change | `nginx -t && systemctl reload nginx` |
 | Renew TLS certificate | Automatic (certbot systemd timer) — manual: `certbot renew` |
-| TLS renewal | Automatic — certbot systemd timer handles it, no action needed |
 
 ---
 
@@ -475,17 +485,17 @@ dig +short hermanfreiman.org A
 # must return 46.224.66.242 before continuing
 ```
 
-### B — Rebuild Hugo with the real domain (HTTP)
+### B — Build the Astro site
 ```bash
 cd /root/workspace/herman-freiman
-hugo --minify
+npm run build
 ```
-`hugo.toml` already has `baseURL = "http://hermanfreiman.org/"` — no edit needed.
+Astro uses root-relative links internally (`/biography/`) so no domain configuration change is needed before or after adding TLS.
 
 Test it:
 ```bash
 curl -s -o /dev/null -w "%{http_code}" http://hermanfreiman.org/
-# should return 200
+# should return 301 (redirect to HTTPS) or 200
 ```
 
 ### C — Run Certbot (get TLS certificate)
@@ -518,20 +528,10 @@ nginx -t && systemctl reload nginx
 ```
 This ensures any direct IP request redirects cleanly to the domain instead of 404-ing.
 
-### D — Switch Hugo to HTTPS and rebuild
-Edit `hugo.toml`:
-```toml
-baseURL = "https://hermanfreiman.org/"
-```
-Then rebuild:
-```bash
-hugo --minify
-```
-
-### E — Verify
+### D — Verify HTTPS
 Open `https://hermanfreiman.org` in your phone browser. Check the padlock icon is shown. Navigate through all menu tabs to confirm everything works.
 
 ---
 
-*Document status: **Deployed via IP. Domain: hermanfreiman.org (pending registration). DNS and TLS pending.***
+*Document status: **Live at https://hermanfreiman.org — Astro v4, nginx, Cloudflare DNS, Let's Encrypt TLS (auto-renews). Phase 1 scaffold complete; Phase 2 (visual homepage) in progress.***
 *Last updated: June 2026*

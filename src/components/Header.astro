@@ -1,5 +1,6 @@
 ---
 const nav = [
+  { name: "Home",        url: "/" },
   { name: "Biography",   url: "/biography/" },
   { name: "Timeline",    url: "/timeline/" },
   { name: "Family Tree", url: "/family/" },
@@ -7,6 +8,7 @@ const nav = [
   { name: "Documents",   url: "/documents/" },
   { name: "History",     url: "/history/" },
   { name: "Research",    url: "/research/" },
+  { name: "About",       url: "/about/" },
 ];
 
 const path = Astro.url.pathname;
@@ -15,11 +17,13 @@ const path = Astro.url.pathname;
 <header class="site-header">
   <!-- Identity zone: light background, signature at original colors -->
   <div class="header-identity">
-    <img
-      class="signature-img"
-      src="/photos/Herman_Fraiman_Signature_Modified.png"
-      alt="Herman Freiman's signature"
-    />
+    <a href="/" class="signature-link">
+      <img
+        class="signature-img"
+        src="/photos/Herman_Fraiman_Signature_Modified.png"
+        alt="Return to home — Herman Freiman's signature"
+      />
+    </a>
     <span class="site-dates">1910 · Boryslaw, Galicia · Holocaust Survivor</span>
   </div>
   <!-- Navigation bar: dark -->
@@ -28,7 +32,7 @@ const path = Astro.url.pathname;
       {nav.map(item => (
         <a
           href={item.url}
-          class:list={["nav-link", { active: path.startsWith(item.url) }]}
+          class:list={["nav-link", { active: item.url === "/" ? path === "/" : path.startsWith(item.url) }]}
         >
           {item.name}
         </a>

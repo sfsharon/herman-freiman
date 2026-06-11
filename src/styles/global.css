@@ -48,6 +48,12 @@ img { max-width: 100%; display: block; }
 }
 
 
+.signature-link {
+  display: block;
+  line-height: 0;
+}
+.signature-link:hover { text-decoration: none; }
+
 .signature-img {
   display: block;
   width: 100%;

@@ -4,16 +4,87 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Research Notes"
-  description="Open questions, documentary discrepancies, and recommended next steps in the Herman Freiman research."
+  description="Document discrepancies, the tattoo question, and suggested archives and next steps for further research into Herman Freiman's history."
 >
-  <div class="stub-page">
+  <article class="prose">
     <h1>Research Notes</h1>
-    <div class="stub-box">
-      Content migration in progress (Phase 3). This section will document
-      discrepancies between sources, the Auschwitz tattoo question, known gaps
-      in the record, and recommended next steps for further archival research.
-      <br /><br />
-      <a href="/">← Back to home</a>
-    </div>
-  </div>
+
+    <h2>Document Discrepancies</h2>
+    <p>Cross-referencing the three source collections reveals inconsistencies common in Holocaust-era records. Administrative documents were often created under duress, from memory, and by clerks writing in a language different from the subject's native tongue.</p>
+    <table>
+      <thead><tr><th>Discrepancy</th><th>Source A</th><th>Source B</th><th>Analysis</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Birth Year</td>
+          <td>1910 (DP cards, Polish registry)</td>
+          <td>1905 (ITS Certificate 413381, TD file)</td>
+          <td>The 1960 certificate notes <em>'Abweichung: Geburtsdatum'</em> (discrepancy in birth date). Age alteration was common for survival purposes during the war.</td>
+        </tr>
+        <tr>
+          <td>Name Spelling</td>
+          <td>FREIMAN (DP cards)</td>
+          <td>FRAJMAN / FREIMANN</td>
+          <td>Phonetic variations between Polish, German, and Yiddish transliterations. All refer to the same person.</td>
+        </tr>
+        <tr>
+          <td>Father's Name</td>
+          <td>Faivel (DP cards)</td>
+          <td>Feibel / Faifel</td>
+          <td>Same Yiddish name (פייבל) rendered differently in each language. The ITS certificate explicitly notes "Faivel = Feibel."</td>
+        </tr>
+        <tr>
+          <td>Marital Status 1941</td>
+          <td><em>ledig</em> (single) — 1959 form</td>
+          <td>Married with children (oral history)</td>
+          <td>The form may reference legal status at a particular administrative moment, or may simply be an error. Family oral history confirms the pre-war marriage.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Did Herman Have a Concentration Camp Tattoo?</h2>
+    <p><strong>Conclusion: Herman Freiman almost certainly did NOT have a concentration camp tattoo.</strong></p>
+    <p><strong>Evidence and Reasoning:</strong></p>
+    <ul>
+      <li><strong>Tattoos were Auschwitz-specific:</strong> The practice of tattooing prisoner numbers was unique to the Auschwitz concentration camp complex. No other camp system — including ghettos, labor camps, or other KZ facilities — tattooed prisoners.</li>
+      <li><strong>Herman was in a ZAL, not a KZ:</strong> All documents consistently record <em>"Gh. u. ZAL Boryslaw"</em> — Ghetto and Zwangsarbeitslager (Forced Labor Camp) Boryslaw. A ZAL was a forced labor facility, legally and administratively distinct from a Konzentrationslager (KZ/concentration camp).</li>
+      <li><strong>The ITS Certificate explicitly states:</strong> <em>"Über die Inhaftierung liegen keine Unterlagen vor"</em> — No documents exist regarding concentration camp (KZ) incarceration.</li>
+      <li><strong>Local labor camp context:</strong> The Boryslaw ZAL served the local oil industry. Workers were kept in place rather than transported to the Auschwitz complex.</li>
+      <li><strong>Survival factors:</strong> His profession as a tailor (<em>Schneider</em>) provided the Germans with a reason to keep him in local forced labor rather than deporting him to an extermination camp.</li>
+    </ul>
+
+    <h2>Research Resources</h2>
+
+    <h3>Primary Archives for Further Research</h3>
+    <ul>
+      <li><strong>Arolsen Archives Online Collections:</strong> <a href="https://collections.arolsen-archives.org" target="_blank" rel="noopener">collections.arolsen-archives.org</a> — Herman's TD File 790 495 is already located here. Additional documents may exist.</li>
+      <li><strong>Yad Vashem Central Database:</strong> <a href="https://yvng.yadvashem.org" target="_blank" rel="noopener">yvng.yadvashem.org</a> — Pages of Testimony, deportation lists, and community records.</li>
+      <li><strong>Landesarchiv Baden-Württemberg</strong> — for complete restitution file E.A. Stuttgart 11 672(o): <a href="https://www.landesarchiv-bw.de" target="_blank" rel="noopener">landesarchiv-bw.de</a>. The full restitution file likely contains a detailed personal testimony about Herman's wartime experiences — this is probably the highest-value untapped source.</li>
+      <li><strong>Israel State Archives</strong> — for ship <em>Negba</em> passenger list (November 1948) and immigration records.</li>
+    </ul>
+
+    <h3>Genealogical Databases</h3>
+    <ul>
+      <li><strong>JRI-Poland</strong> (Jewish Records Indexing): <a href="https://jri-poland.org" target="_blank" rel="noopener">jri-poland.org</a></li>
+      <li><strong>Gesher Galicia</strong> (Galician Jewish genealogy): <a href="https://www.geshergalicia.org" target="_blank" rel="noopener">geshergalicia.org</a></li>
+      <li><strong>JewishGen:</strong> <a href="https://www.jewishgen.org" target="_blank" rel="noopener">jewishgen.org</a></li>
+      <li><strong>FamilySearch:</strong> <a href="https://www.familysearch.org" target="_blank" rel="noopener">familysearch.org</a></li>
+    </ul>
+
+    <h3>Community &amp; Memorial Resources</h3>
+    <ul>
+      <li><strong>Boryslaw Yizkor Book</strong> — available through Yad Vashem or JewishGen. A memorial volume compiled by survivors with testimonies that may mention the Freiman family.</li>
+      <li><strong>Ukrainian Archives in Lviv</strong> — for pre-war vital records (births, marriages) from Boryslaw.</li>
+      <li><strong>Central Archives for the History of the Jewish People, Jerusalem</strong> — community and organizational records.</li>
+    </ul>
+
+    <h2>Recommended Next Steps</h2>
+    <ol>
+      <li><strong>Request the complete restitution file</strong> — Contact Landesarchiv Baden-Württemberg for file E.A. Stuttgart 11 672(o). This file almost certainly contains Herman's own written or transcribed testimony about his wartime experiences, which would fill the largest gap in the documentary record.</li>
+      <li><strong>Search Pages of Testimony at Yad Vashem</strong> — Submit or search for Pages of Testimony for FREIMAN/FRAJMAN family members from Boryslaw. This may reveal names of the first wife and children.</li>
+      <li><strong>Locate the Boryslaw Yizkor Book</strong> — Search survivor testimonies for mentions of the Freiman family. JewishGen has a translation project for many Yizkor books.</li>
+      <li><strong>Record oral histories from living family members</strong> — Descendants who knew Herman may have heard names, stories, or details not captured in any document.</li>
+      <li><strong>Request the ship <em>Negba</em> passenger list</strong> — The Israel State Archives hold immigration records from 1948. The passenger manifest may include additional family members or provide more detail about Herman and Ester's arrival.</li>
+      <li><strong>Search DP Camp Ulm records</strong> — The Arolsen Archives hold extensive Displaced Persons camp documentation. Additional 1946–1948 records may exist beyond the DP-2 and DP-3 cards already retrieved.</li>
+    </ol>
+  </article>
 </BaseLayout>

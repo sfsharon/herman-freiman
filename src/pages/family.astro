@@ -4,15 +4,73 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout
   title="Family Tree"
-  description="Known relatives and name variants for the Freiman family."
+  description="Genealogical family tree of Herman (Zvi) Freiman — the Freiman and Rosen families of Boryslaw."
 >
-  <div class="stub-page">
+  <article class="prose">
     <h1>Family Tree</h1>
-    <div class="stub-box">
-      Content migration in progress (Phase 3). This section will present the
-      known family tree, name variants across documents, and gaps in the record.
-      <br /><br />
-      <a href="/">← Back to home</a>
-    </div>
-  </div>
+    <p>The following family structure has been established from available documentation. Significant gaps remain: the name of Herman's first wife and their children are not recorded in any surviving document. The names of Herman and Ester's three sons also do not appear in the documentary record, though they are visible in the family photograph.</p>
+
+    <h2>Family Structure</h2>
+    <pre class="family-tree">FREIMAN / FRAJMAN Family of Boryslaw
+
+                    PARENTS
+    ┌─────────────────────┴─────────────────────┐
+    │                                           │
+Feibel FREIMAN                        Shifra ROSEN
+(Faivel/Faifel)                        (Schifra/Szyfra)
+    │
+    │
+                    SUBJECT
+    │
+Herman (Tzvi) FREIMAN ══════════════ m.1 Wife (name unknown)
+b. March 2, 1910                         │
+Boryslaw, Poland                         │
+    │                              Children (perished in Holocaust)
+    │
+    ╚══════════════════════════════ m.2 Ester FREIMAN
+    (married 1945, Poland)               b. April 15, 1920
+                                         │
+                    ┌───────────────────┼───────────────────┐
+                    │                   │                   │
+                 Son 1               Son 2               Son 3
+            (names not in documents — visible in family photo)</pre>
+
+    <h2>Known Name Variants</h2>
+    <p>The family name appears in multiple transliterations across documents written in Polish, German, and Yiddish:</p>
+    <table>
+      <thead><tr><th>Variant</th><th>Language/Context</th></tr></thead>
+      <tbody>
+        <tr><td>FREIMAN</td><td>German and ITS documents</td></tr>
+        <tr><td>FRAJMAN</td><td>Polish registry</td></tr>
+        <tr><td>FREIMANN</td><td>Some ITS cards (double-n)</td></tr>
+      </tbody>
+    </table>
+    <p>Herman's father's name (פייבל) similarly appears as Feibel, Faivel, Faifel, and Fajwel — all the same Yiddish name rendered phonetically in different languages.</p>
+
+    <h2>Gaps &amp; Open Questions</h2>
+    <ul>
+      <li><strong>First wife:</strong> Name unknown. No documentary record found. Family oral history confirms the marriage.</li>
+      <li><strong>Children from first marriage:</strong> Names and number unknown. All perished during the Holocaust.</li>
+      <li><strong>Sons of Herman and Ester:</strong> Three sons are visible in the family photograph. Names not found in surviving documents.</li>
+      <li><strong>Siblings of Herman:</strong> Unknown. No documentation found for brothers or sisters.</li>
+      <li><strong>Extended Rosen family (mother's side):</strong> Not documented in available sources.</li>
+    </ul>
+    <p>See <a href="/research/">Research Notes</a> for suggested archives that may hold additional genealogical information.</p>
+  </article>
 </BaseLayout>
+
+<style>
+  .family-tree {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    background: var(--color-parchment);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    white-space: pre;
+    margin: 1.5rem 0;
+    color: var(--color-charcoal);
+  }
+</style>

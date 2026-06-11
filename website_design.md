@@ -377,13 +377,26 @@ Astro is the better direction for this project because:
 
 This is the recommended sequence:
 
-1. **Phase 1 — Astro scaffold:** Create the Astro project structure, routing, layout shell, global CSS, and image handling.
-2. **Phase 2 — Visual homepage:** Build the signature masthead, portrait-led introduction, section cards, short timeline strip, featured artifact, and About section.
-3. **Phase 3 — Content migration:** Move the existing Markdown content into Astro content collections or MDX pages, preserving source material and captions.
-4. **Phase 4 — Custom page layouts:** Build designed pages for Gallery, Timeline, Documents, Biography, Family Tree, History, and Open Questions.
+1. **Phase 1 — Astro scaffold** ✅ *Completed 2026-06-10*
+   - Astro v4 project with `package.json`, `astro.config.mjs`, `tsconfig.json`
+   - `src/layouts/BaseLayout.astro` — HTML shell, fonts, meta
+   - `src/components/Header.astro` — dark header with signature watermark, active-state nav
+   - `src/components/Footer.astro` — archive credit and sources line
+   - `src/styles/global.css` — full design token set (palette, typography, component styles)
+   - `src/pages/index.astro` — dedication + section-card grid stub
+   - `src/pages/{biography,timeline,family,gallery,documents,history,research}.astro` — stubs
+   - Photos moved from `static/photos/` → `public/photos/` (Astro's static assets dir)
+   - Hugo removed: `hugo.toml`, `themes/PaperMod` submodule, `static/` dir deleted
+   - nginx root updated from `public/` → `dist/` (Astro's build output dir)
+   - Build command: `npm run build` (was `hugo --minify`)
+   - Dev command: `npm run dev` (binds 0.0.0.0:8080, accessible via existing SSH tunnel)
+
+2. **Phase 2 — Visual homepage:** Build the signature masthead, portrait-led introduction, section cards with photos, short timeline strip, featured artifact, and About section.
+3. **Phase 3 — Content migration:** Move the existing Markdown content from `content/` into Astro pages, replacing Hugo shortcodes with Astro components or standard Markdown image syntax.
+4. **Phase 4 — Custom page layouts:** Build designed pages for Gallery, Timeline, Documents, Biography, Family Tree, History, and Research Notes.
 5. **Phase 5 — Future Hebrew readiness:** Structure routes, components, labels, and typography so a full Hebrew version can be added later without redesigning the site.
 
-Option A remains a fallback if migration effort must be minimized, but it is no longer the recommended direction.
+Option A (Hugo + PaperMod CSS override) is no longer relevant — the migration to Astro has been made.
 
 ---
 

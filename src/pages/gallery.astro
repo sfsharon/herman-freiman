@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const photos = [
+  { src: "/photos/personal_Zvi_Fraiman_With_Suite_Age_40_Approx.png",  caption: "Herman Freiman in suit, circa 1950s" },
+  { src: "/photos/personal_Fraiman_Pic_27A.png",                        caption: "Early portrait — Herman Freiman" },
+  { src: "/photos/personal_Fraiman_Pic_27B.png",                        caption: "Early portrait — Herman Freiman" },
+  { src: "/photos/personal_Ester_and_Zvi_Fraiman_Adults.jpg",           caption: "Ester and Herman Freiman" },
+  { src: "/photos/personal_Ester_and_Zvi_Fraiman_Adults_2.png",         caption: "Ester and Herman Freiman" },
+  { src: "/photos/personal_Ester_and_Zvi_Fraiman_Smiling.jpg",          caption: "Ester and Herman Freiman" },
+  { src: "/photos/personal_Zvi_and_Ester_With_Baby.png",                caption: "Herman and Ester with their first son" },
+  { src: "/photos/personal_Family_Photo_Fraiman_Side.jpg",              caption: "Freiman family — Israel" },
+  { src: "/photos/personal_Fraiman_Familiy_Photos.jpg",                 caption: "Freiman family photographs" },
+  { src: "/photos/personal_Fraiman_Family__Three_Small_Children.png",   caption: "Three Freiman children" },
+  { src: "/photos/Herman_Fraiman_Signature.jpg",                        caption: "Herman Freiman's signature" },
+  { src: "/photos/Herman_Fraiman_Signature_Modified.png",               caption: "Herman Freiman's signature (enhanced)" },
+];
+---
+
+<BaseLayout
+  title="Gallery"
+  description="Family photographs of Herman Zvi Freiman and the Freiman family, from their years in Israel."
+>
+  <div class="stub-page">
+    <h1>Gallery</h1>
+    <p class="stub-note">Photo grid layout coming in Phase 4. Photographs are available below.</p>
+  </div>
+
+  <div class="proto-gallery">
+    {photos.map(p => (
+      <figure class="proto-photo">
+        <img src={p.src} alt={p.caption} loading="lazy" />
+        <figcaption>{p.caption}</figcaption>
+      </figure>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .stub-note {
+    color: var(--color-mid-gray);
+    font-style: italic;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .proto-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 1.5rem 2rem;
+  }
+
+  .proto-photo img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 2px;
+    filter: sepia(15%) contrast(98%);
+  }
+
+  figcaption {
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--color-mid-gray);
+    font-style: italic;
+  }
+</style>

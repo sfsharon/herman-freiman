@@ -226,39 +226,58 @@ ufw enable
 
 ## 8. Deployment Architecture
 
-The existing git repository at `/root/workspace/herman-freiman/` **is** the Hugo project root. No second repository or `/opt/` location is needed.
+The git repository at `/root/workspace/herman-freiman/` is the Astro project root.
 
 ```
-/root/workspace/herman-freiman/          ← Git repo + Hugo project root
+/root/workspace/herman-freiman/          ← Git repo + Astro project root
 │
-├── content/                             ← Markdown source (single truth point)
-│   ├── _index.md
-│   ├── biography.md
-│   ├── timeline.md
-│   ├── family.md
-│   ├── documents.md
-│   ├── history.md
-│   ├── gallery.md
-│   └── research.md
+├── src/                                 ← Astro source (pages, components, styles)
+│   ├── layouts/
+│   │   └── BaseLayout.astro            ← HTML shell (fonts, meta, header, footer)
+│   ├── components/
+│   │   ├── Header.astro                ← Dark header with signature watermark
+│   │   └── Footer.astro
+│   ├── pages/                          ← One file per URL route
+│   │   ├── index.astro                 ← / (home)
+│   │   ├── biography.astro             ← /biography/
+│   │   ├── timeline.astro
+│   │   ├── family.astro
+│   │   ├── gallery.astro
+│   │   ├── documents.astro
+│   │   ├── history.astro
+│   │   └── research.astro
+│   └── styles/
+│       └── global.css                  ← Design tokens, base styles
 │
-├── static/photos/                       ← Family photographs (served as-is)
-├── themes/PaperMod/                     ← Git submodule (read-only theme)
-├── documents/                           ← Original source documents (archived)
+├── public/                             ← Static assets (copied to dist/ as-is)
+│   └── photos/                         ← Family photographs
+│
+├── content/                            ← Hugo Markdown source (pre-migration archive)
+│   └── *.md                            ← Will be migrated in Phase 3
+│
+├── documents/                          ← Original research documents (archived)
 │   ├── Herman_Freiman_Research_Report.md
 │   ├── Arolsen/
 │   ├── Personal/
 │   └── Yad_Vashem/
-├── hugo.toml                            ← Site configuration
-└── public/                             ← Generated output (in .gitignore)
+│
+├── astro.config.mjs                    ← Astro configuration
+├── package.json                        ← npm scripts (build, dev, preview)
+└── dist/                               ← Generated output (in .gitignore)
     └── (served by nginx)
 ```
 
-**Nginx points to:** `/root/workspace/herman-freiman/public/`
+**Nginx points to:** `/root/workspace/herman-freiman/dist/`
 
-**Update workflow:**
-1. Edit any `content/*.md` file
-2. Run `hugo --minify` (from `/root/workspace/herman-freiman/`)
-3. Nginx immediately serves the regenerated `public/` directory — no restart needed
+**Update workflow (Phase 1–2 — Astro pages):**
+1. Edit any file in `src/pages/` or `src/components/`
+2. Run `npm run build` (from `/root/workspace/herman-freiman/`)
+3. Nginx immediately serves the regenerated `dist/` directory — no restart needed
+
+**Update workflow (Phase 3+ — after content migration):**
+1. Edit the relevant `.astro` page (content will be embedded or imported from Markdown)
+2. Run `npm run build`
+3. Nginx serves `dist/`
 
 ---
 
@@ -380,39 +399,46 @@ To restart it if ever needed:
 systemctl restart nginx
 ```
 
-The site is served from `/root/workspace/herman-freiman/public/`. Nginx reads that directory directly — no restart is needed after a Hugo rebuild.
+The site is served from `/root/workspace/herman-freiman/dist/`. Nginx reads that directory directly — no restart is needed after an Astro build.
 
 ---
 
 ## 11. Updating Content (day-to-day workflow)
 
-### Step 1 — Edit the Markdown file
-Open any file in `content/` and save your changes. Example:
+### Step 1 — Edit the source file
+
+During Phase 1–2, pages are Astro files in `src/pages/`:
 ```bash
-nano /root/workspace/herman-freiman/content/biography.md
+nano /root/workspace/herman-freiman/src/pages/biography.astro
 ```
 
-### Step 2 — Rebuild the site
-Run Hugo from the project directory. **Which command depends on DNS status:**
+During Phase 3+, content will be in Markdown files imported by the Astro pages. The exact path will be documented when Phase 3 is implemented.
 
-| DNS situation | Build command |
-|---------------|--------------|
-| DNS not set up yet — testing via IP `46.224.66.242` | `hugo --minify -b http://46.224.66.242/` |
-| DNS live, HTTP only (`hermanfreiman.org` resolves) | `hugo --minify` (baseURL in hugo.toml is `http://hermanfreiman.org/`) |
-| DNS live + TLS active (after certbot) | Change `baseURL` in `hugo.toml` to `https://hermanfreiman.org/`, then `hugo --minify` |
+### Step 2 — Preview locally (optional)
 
-**Important:** After certbot runs, the `https://` step is mandatory. Hugo bakes the baseURL into every nav link. If the links say `http://` while the site is served over `https://` (via Cloudflare), clicking any tab will cause a redirect loop or mixed-content failure.
-
-Hugo regenerates `public/` in under a second. Nginx immediately serves the updated files — no nginx restart needed.
-
-### Why the different build commands?
-Hugo bakes the `baseURL` into every navigation link in the generated HTML. If the URL in `hugo.toml` is `http://hermanfreiman.com/` but DNS is not yet pointing here, every menu click will try to reach a domain that doesn't exist and fail. Passing `-b http://46.224.66.242/` overrides that for the current build only without changing `hugo.toml`.
-
-### Step 3 — Verify
 ```bash
-curl -s -o /dev/null -w "%{http_code}" http://localhost/biography/
-# should print: 200
+cd /root/workspace/herman-freiman
+npm run dev
 ```
+
+Open `http://localhost:8080` in a browser (via the existing SSH tunnel `-L 8080:localhost:8080`). The dev server hot-reloads on every file save — no manual rebuild needed during editing.
+
+### Step 3 — Build for production
+
+```bash
+cd /root/workspace/herman-freiman
+npm run build
+```
+
+Astro generates `dist/` in under two seconds. Nginx immediately serves the updated files — no nginx restart needed.
+
+### Step 4 — Verify
+
+```bash
+curl -sk -H "Host: hermanfreiman.org" https://localhost/biography/ | grep "<title>"
+```
+
+Should print: `<title>Biography — Herman (Zvi) Freiman</title>`
 
 ---
 
@@ -421,12 +447,13 @@ curl -s -o /dev/null -w "%{http_code}" http://localhost/biography/
 | Task | Command |
 |------|---------|
 | Check site is up | `systemctl status nginx` |
-| Edit a page | `nano content/<page>.md` |
-| Rebuild (DNS not ready) | `cd /root/workspace/herman-freiman && hugo --minify -b http://46.224.66.242/` |
-| Rebuild (DNS ready, HTTP) | `cd /root/workspace/herman-freiman && hugo --minify` |
-| Live-preview while editing | `cd /root/workspace/herman-freiman && hugo server` → open `http://localhost:1313` (requires `-L 1313:localhost:1313` in SSH command) |
-| Add a photo | Copy to `static/photos/`, add `{{</* figure */>}}` shortcode in `gallery.md`, rebuild |
-| Switch to HTTPS after certbot | Edit `baseURL` in `hugo.toml` → `https://hermanfreiman.org/`, then `hugo --minify` |
+| Edit a page | `nano src/pages/<page>.astro` |
+| Live-preview while editing | `cd /root/workspace/herman-freiman && npm run dev` → open `http://localhost:8080` (SSH tunnel already on port 8080) |
+| Build for production | `cd /root/workspace/herman-freiman && npm run build` |
+| Add a photo | Copy to `public/photos/`, reference as `/photos/filename.ext` in any Astro page, rebuild |
+| Check nginx is serving | `curl -sk -H "Host: hermanfreiman.org" https://localhost/ \| grep "<title>"` |
+| Reload nginx after config change | `nginx -t && systemctl reload nginx` |
+| Renew TLS certificate | Automatic (certbot systemd timer) — manual: `certbot renew` |
 | TLS renewal | Automatic — certbot systemd timer handles it, no action needed |
 
 ---

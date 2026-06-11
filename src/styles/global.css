@@ -1,0 +1,327 @@
+/* ── Design tokens ── */
+:root {
+  --color-charcoal:  #1c1c1e;
+  --color-off-white: #f8f5f0;
+  --color-parchment: #e8dcc8;
+  --color-mid-gray:  #6b6560;
+  --color-border:    #d0c4b0;
+  --color-accent:    #7a5c3a;
+  --color-accent-dk: #5a3c1a;
+
+  --font-serif:  'EB Garamond', 'Georgia', 'Times New Roman', serif;
+  --font-sans:   'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+  --font-hebrew: 'Noto Serif Hebrew', 'David Libre', 'Frank Ruhl Libre', serif;
+
+  --content-width: 960px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Base ── */
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-off-white);
+  color: var(--color-charcoal);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-accent-dk);
+  text-decoration: underline;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ── Site header ── */
+.site-header {
+  background-color: var(--color-charcoal);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0 1.75rem;
+}
+
+.signature-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72%;
+  max-width: 620px;
+  opacity: 0.07;
+  filter: invert(1);
+  pointer-events: none;
+  user-select: none;
+}
+
+.header-inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.site-title {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f8f5f0;
+  letter-spacing: 0.03em;
+}
+.site-title:hover { color: #fff; text-decoration: none; }
+
+.site-title-hebrew {
+  display: block;
+  font-family: var(--font-hebrew);
+  font-size: 1.1rem;
+  color: #c8b8a0;
+  margin-top: 0.2rem;
+}
+
+.site-dates {
+  display: block;
+  font-size: 0.75rem;
+  color: #8a7a68;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.4rem;
+  margin-top: 1.2rem;
+}
+
+.nav-link {
+  font-size: 0.78rem;
+  color: #b0a08a;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: #f8f5f0;
+  border-bottom-color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* ── Main content wrapper ── */
+.main-content {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+}
+
+/* ── Site footer ── */
+.site-footer {
+  background-color: var(--color-charcoal);
+  margin-top: 4rem;
+  padding: 2rem 0;
+}
+
+.footer-inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-name {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: #c8b8a0;
+  margin-bottom: 0.3rem;
+}
+
+.footer-sources {
+  font-size: 0.75rem;
+  color: #5a5048;
+  letter-spacing: 0.04em;
+}
+
+/* ── Home page ── */
+.home-dedication {
+  text-align: center;
+  padding-bottom: 2.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.home-dedication h1 {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  color: var(--color-charcoal);
+  margin-bottom: 0.3rem;
+}
+
+.home-dedication .heb {
+  font-family: var(--font-hebrew);
+  font-size: 1.3rem;
+  color: var(--color-mid-gray);
+  margin-bottom: 0.5rem;
+}
+
+.home-dedication .birth-line {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-mid-gray);
+  margin-bottom: 1.5rem;
+}
+
+.home-dedication .opening {
+  max-width: 580px;
+  margin: 0 auto;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--color-charcoal);
+  line-height: 1.75;
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1.25rem;
+  text-align: left;
+}
+
+/* Section cards grid */
+.section-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 860px) {
+  .section-cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .section-cards { grid-template-columns: 1fr; }
+  .home-dedication h1 { font-size: 1.8rem; }
+}
+
+.section-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.25rem 1.1rem;
+  background: var(--color-parchment);
+  border: 1px solid #d4c4a8;
+  border-radius: 3px;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.section-card:hover {
+  background: #ddd0b8;
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-charcoal);
+  margin-bottom: 0.3rem;
+}
+
+.card-desc {
+  font-size: 0.83rem;
+  color: var(--color-mid-gray);
+  line-height: 1.45;
+}
+
+.phase-notice {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--color-mid-gray);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* ── Stub pages (inner pages before Phase 3 content migration) ── */
+.stub-page h1 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--color-charcoal);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 1.5rem;
+}
+
+.stub-box {
+  background: var(--color-parchment);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  padding: 1.25rem 1.5rem;
+  color: var(--color-mid-gray);
+  font-size: 0.95rem;
+}
+
+.stub-box a { color: var(--color-accent); }
+
+/* ── Prose (Phase 3+ content pages) ── */
+.prose h1, .prose h2, .prose h3 {
+  font-family: var(--font-serif);
+  color: var(--color-charcoal);
+}
+.prose h2 {
+  font-size: 1.55rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.prose h3 {
+  font-size: 1.2rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.prose p { margin-bottom: 1rem; }
+.prose ul, .prose ol {
+  margin: 0.5rem 0 1rem 1.5rem;
+}
+.prose blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--color-mid-gray);
+}
+
+/* Tables */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+.prose table th {
+  background: var(--color-charcoal);
+  color: var(--color-off-white);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.prose table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+.prose table tr:nth-child(even) td {
+  background-color: var(--color-parchment);
+}

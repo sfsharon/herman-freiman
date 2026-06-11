@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const sections = [
+  { title: "Biography",   url: "/biography/",  desc: "Identity, family, and documentary sources" },
+  { title: "Timeline",    url: "/timeline/",   desc: "Chronological record, 1910–1960s" },
+  { title: "Family Tree", url: "/family/",     desc: "Known relatives and name variants" },
+  { title: "Gallery",     url: "/gallery/",    desc: "Family photographs from Israel" },
+  { title: "Documents",   url: "/documents/",  desc: "Arolsen Archives, ITS cards, Vollmacht" },
+  { title: "History",     url: "/history/",    desc: "Boryslaw, the Ghetto, and the Jewish community of eastern Galicia" },
+  { title: "Research",    url: "/research/",   desc: "Open questions, discrepancies, and recommended next steps" },
+];
+---
+
+<BaseLayout
+  title="Herman (Zvi) Freiman"
+  description="Memorial archive documenting the life of Herman Zvi Freiman, Holocaust survivor from Boryslaw, Galicia — compiled from Arolsen Archives, Yad Vashem, and personal family photographs."
+>
+  <section class="home-dedication">
+    <h1>Herman Zvi Freiman</h1>
+    <p class="heb" dir="rtl" lang="he">הרמן צבי פריימן</p>
+    <p class="birth-line">Born March 2, 1910 · Boryslaw, Galicia · Holocaust Survivor</p>
+    <p class="opening">
+      Herman Zvi Freiman was born in Boryslaw in 1910.
+      His wife and children did not survive the Holocaust. He did.
+    </p>
+  </section>
+
+  <div class="section-cards">
+    {sections.map(s => (
+      <a href={s.url} class="section-card">
+        <span class="card-title">{s.title}</span>
+        <span class="card-desc">{s.desc}</span>
+      </a>
+    ))}
+  </div>
+
+  <p class="phase-notice">
+    Visual redesign in progress — full photo layout coming in Phase 2.
+  </p>
+</BaseLayout>

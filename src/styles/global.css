@@ -41,75 +41,49 @@ a:hover {
 img { max-width: 100%; display: block; }
 
 /* ── Site header ── */
-.site-header {
-  background-color: var(--color-charcoal);
-  position: relative;
+.header-identity {
+  background-color: var(--color-off-white);
+  border-bottom: 1px solid var(--color-border);
   overflow: hidden;
-  padding: 2rem 0 1.75rem;
 }
 
-.signature-watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 72%;
-  max-width: 620px;
-  opacity: 0.07;
-  filter: invert(1);
-  pointer-events: none;
-  user-select: none;
-}
 
-.header-inner {
-  position: relative;
-  z-index: 2;
-  max-width: var(--content-width);
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.site-title {
+.signature-img {
   display: block;
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  font-weight: 700;
-  color: #f8f5f0;
-  letter-spacing: 0.03em;
-}
-.site-title:hover { color: #fff; text-decoration: none; }
-
-.site-title-hebrew {
-  display: block;
-  font-family: var(--font-hebrew);
-  font-size: 1.1rem;
-  color: #c8b8a0;
-  margin-top: 0.2rem;
+  width: 100%;
 }
 
 .site-dates {
   display: block;
-  font-size: 0.75rem;
-  color: #8a7a68;
-  letter-spacing: 0.12em;
+  text-align: center;
+  font-size: 0.68rem;
+  color: #a09080;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
-  margin-top: 0.3rem;
+  padding: 0.4rem 1.5rem 1rem;
+}
+
+.site-nav-bar {
+  background-color: var(--color-charcoal);
 }
 
 .site-nav {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0 1.4rem;
-  margin-top: 1.2rem;
+  justify-content: center;
+  gap: 0;
 }
 
 .nav-link {
-  font-size: 0.78rem;
-  color: #b0a08a;
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: #a09080;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  padding-bottom: 2px;
-  border-bottom: 1px solid transparent;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 2px solid transparent;
   transition: color 0.15s, border-color 0.15s;
 }
 .nav-link:hover,
@@ -152,101 +126,228 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.04em;
 }
 
-/* ── Home page ── */
-.home-dedication {
-  text-align: center;
+/* ── Home page — Phase 2 ── */
+
+/* Hero: portrait + dedication text */
+.hero {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
   padding-bottom: 2.5rem;
   margin-bottom: 2.5rem;
   border-bottom: 1px solid var(--color-border);
 }
 
-.home-dedication h1 {
+@media (max-width: 700px) {
+  .hero { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+.hero-portrait img {
+  width: 100%;
+  border-radius: 2px;
+  filter: sepia(12%) contrast(97%);
+}
+
+.hero-name-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.hero-name {
   font-family: var(--font-serif);
-  font-size: 2.4rem;
+  font-size: 1.9rem;
   color: var(--color-charcoal);
-  margin-bottom: 0.3rem;
 }
 
-.home-dedication .heb {
+.hero-name-heb {
   font-family: var(--font-hebrew);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: var(--color-mid-gray);
-  margin-bottom: 0.5rem;
 }
 
-.home-dedication .birth-line {
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
+.hero-dates {
+  font-size: 0.72rem;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
   color: var(--color-mid-gray);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
-.home-dedication .opening {
-  max-width: 580px;
-  margin: 0 auto;
+.hero-quote {
   font-family: var(--font-serif);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-style: italic;
   color: var(--color-charcoal);
-  line-height: 1.75;
   border-left: 3px solid var(--color-accent);
-  padding-left: 1.25rem;
-  text-align: left;
+  padding-left: 1.1rem;
+  margin: 0 0 1.1rem;
+  line-height: 1.7;
 }
 
-/* Section cards grid */
+.hero-body {
+  font-size: 0.92rem;
+  color: var(--color-mid-gray);
+  line-height: 1.75;
+}
+
+/* Photo section cards */
 .section-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 @media (max-width: 860px) {
   .section-cards { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 540px) {
+@media (max-width: 500px) {
   .section-cards { grid-template-columns: 1fr; }
-  .home-dedication h1 { font-size: 1.8rem; }
 }
 
-.section-card {
-  display: flex;
-  flex-direction: column;
-  padding: 1.25rem 1.25rem 1.1rem;
-  background: var(--color-parchment);
-  border: 1px solid #d4c4a8;
+.photo-card {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
   border-radius: 3px;
-  transition: background 0.15s, border-color 0.15s, transform 0.15s;
-}
-.section-card:hover {
-  background: #ddd0b8;
-  border-color: var(--color-accent);
-  transform: translateY(-2px);
+  background: var(--color-parchment);
   text-decoration: none;
 }
+.photo-card:hover { text-decoration: none; }
+.photo-card:hover img {
+  transform: scale(1.04);
+  filter: sepia(28%) contrast(94%);
+}
+.photo-card:hover .photo-card-label {
+  background: linear-gradient(transparent, rgba(28,28,30,0.94));
+}
 
-.card-title {
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(15%) contrast(97%);
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.photo-card-label {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(transparent, rgba(28,28,30,0.80));
+  transition: background 0.35s ease;
+}
+
+.photo-card-title {
+  display: block;
   font-family: var(--font-serif);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--color-charcoal);
-  margin-bottom: 0.3rem;
+  color: #f8f5f0;
+  letter-spacing: 0.02em;
 }
 
-.card-desc {
-  font-size: 0.83rem;
-  color: var(--color-mid-gray);
-  line-height: 1.45;
+.photo-card-desc {
+  display: block;
+  font-size: 0.72rem;
+  color: #c8b8a0;
+  margin-top: 0.12rem;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
 }
 
-.phase-notice {
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--color-mid-gray);
-  font-style: italic;
+/* History card: no photo — dark background with centred text */
+.photo-card--text {
+  background: var(--color-charcoal);
+}
+.photo-card--text .photo-card-label {
+  inset: 0;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.photo-card--text .photo-card-title { font-size: 1.35rem; }
+.photo-card--text .photo-card-desc {
+  font-size: 0.82rem;
   margin-top: 0.5rem;
+  line-height: 1.5;
+  color: #b0a08a;
+}
+
+/* Timeline strip */
+.timeline-strip {
+  background: var(--color-parchment);
+  border-radius: 3px;
+  padding: 1.75rem 2rem 1.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.timeline-heading {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mid-gray);
+  margin-bottom: 1.1rem;
+}
+
+.timeline-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.milestone {
+  display: flex;
+  gap: 1.25rem;
+  align-items: baseline;
+}
+
+.milestone-year {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  min-width: 72px;
+  flex-shrink: 0;
+}
+
+.milestone-text {
+  font-size: 0.88rem;
+  color: var(--color-charcoal);
+  line-height: 1.5;
+}
+
+/* About this archive */
+.about-archive {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.75rem;
+}
+
+.about-archive h2 {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mid-gray);
+  margin-bottom: 0.6rem;
+}
+
+.about-archive p {
+  font-size: 0.88rem;
+  color: var(--color-mid-gray);
+  line-height: 1.75;
+  max-width: 680px;
 }
 
 /* ── Stub pages (inner pages before Phase 3 content migration) ── */

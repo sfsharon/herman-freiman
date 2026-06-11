@@ -13,16 +13,17 @@ const path = Astro.url.pathname;
 ---
 
 <header class="site-header">
-  <img
-    class="signature-watermark"
-    src="/photos/Herman_Fraiman_Signature_Modified.png"
-    alt=""
-    aria-hidden="true"
-  />
-  <div class="header-inner">
-    <a href="/" class="site-title">Herman Zvi Freiman</a>
-    <span class="site-title-hebrew" dir="rtl" lang="he">הרמן צבי פריימן</span>
+  <!-- Identity zone: light background, signature at original colors -->
+  <div class="header-identity">
+    <img
+      class="signature-img"
+      src="/photos/Herman_Fraiman_Signature_Modified.png"
+      alt="Herman Freiman's signature"
+    />
     <span class="site-dates">1910 · Boryslaw, Galicia · Holocaust Survivor</span>
+  </div>
+  <!-- Navigation bar: dark -->
+  <div class="site-nav-bar">
     <nav class="site-nav" aria-label="Main navigation">
       {nav.map(item => (
         <a

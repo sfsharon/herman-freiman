@@ -1,41 +1,142 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const sections = [
-  { title: "Biography",   url: "/biography/",  desc: "Identity, family, and documentary sources" },
-  { title: "Timeline",    url: "/timeline/",   desc: "Chronological record, 1910–1960s" },
-  { title: "Family Tree", url: "/family/",     desc: "Known relatives and name variants" },
-  { title: "Gallery",     url: "/gallery/",    desc: "Family photographs from Israel" },
-  { title: "Documents",   url: "/documents/",  desc: "Arolsen Archives, ITS cards, Vollmacht" },
-  { title: "History",     url: "/history/",    desc: "Boryslaw, the Ghetto, and the Jewish community of eastern Galicia" },
-  { title: "Research",    url: "/research/",   desc: "Open questions, discrepancies, and recommended next steps" },
-];
 ---
 
 <BaseLayout
-  title="Herman (Zvi) Freiman"
+  title="Herman (Zvi) Freiman — Memorial Archive"
   description="Memorial archive documenting the life of Herman Zvi Freiman, Holocaust survivor from Boryslaw, Galicia — compiled from Arolsen Archives, Yad Vashem, and personal family photographs."
 >
-  <section class="home-dedication">
-    <h1>Herman Zvi Freiman</h1>
-    <p class="heb" dir="rtl" lang="he">הרמן צבי פריימן</p>
-    <p class="birth-line">Born March 2, 1910 · Boryslaw, Galicia · Holocaust Survivor</p>
-    <p class="opening">
-      Herman Zvi Freiman was born in Boryslaw in 1910.
-      His wife and children did not survive the Holocaust. He did.
+
+  <!-- ── Hero: portrait + dedication text ── -->
+  <section class="hero">
+    <div class="hero-portrait">
+      <img
+        src="/photos/personal_Zvi_Fraiman_With_Suite_Age_40_Approx.png"
+        alt="Herman Zvi Freiman, approximately age 40"
+      />
+    </div>
+    <div class="hero-text">
+      <div class="hero-name-row">
+        <h1 class="hero-name">Herman Zvi Freiman</h1>
+        <span class="hero-name-heb" dir="rtl" lang="he">הרמן צבי פריימן</span>
+      </div>
+      <p class="hero-dates">Born March 2, 1910 · Boryslaw, Galicia · Holocaust Survivor</p>
+      <blockquote class="hero-quote">
+        Herman Zvi Freiman was born in Boryslaw in 1910.<br />
+        His wife and children did not survive the Holocaust. He did.
+      </blockquote>
+      <p class="hero-body">
+        This archive documents what is known of his life — drawn from Arolsen Archives
+        records, Yad Vashem testimony, personal photographs, and family memory.
+        It is a work in progress, assembled by his descendants.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Photo section cards ── -->
+  <div class="section-cards">
+
+    <a href="/biography/" class="photo-card">
+      <img
+        src="/photos/personal_Zvi_Fraiman_With_Suite_Age_40_Approx.png"
+        alt="Herman Freiman portrait"
+      />
+      <div class="photo-card-label">
+        <span class="photo-card-title">Biography</span>
+        <span class="photo-card-desc">Identity, family, and documentary sources</span>
+      </div>
+    </a>
+
+    <a href="/gallery/" class="photo-card">
+      <img
+        src="/photos/personal_Ester_and_Zvi_Fraiman_Smiling.jpg"
+        alt="Ester and Zvi Fraiman"
+      />
+      <div class="photo-card-label">
+        <span class="photo-card-title">Gallery</span>
+        <span class="photo-card-desc">Family photographs from Israel</span>
+      </div>
+    </a>
+
+    <a href="/timeline/" class="photo-card">
+      <img
+        src="/photos/personal_Family_Photo_Fraiman_Side.jpg"
+        alt="Fraiman family photograph"
+      />
+      <div class="photo-card-label">
+        <span class="photo-card-title">Timeline</span>
+        <span class="photo-card-desc">Chronological record, 1910–1960s</span>
+      </div>
+    </a>
+
+    <a href="/documents/" class="photo-card">
+      <img
+        src="/photos/Herman_Fraiman_Signature_Modified.png"
+        alt="Herman Freiman signature document"
+        style="object-position: center top;"
+      />
+      <div class="photo-card-label">
+        <span class="photo-card-title">Documents</span>
+        <span class="photo-card-desc">Arolsen Archives, ITS cards, Vollmacht</span>
+      </div>
+    </a>
+
+    <a href="/history/" class="photo-card photo-card--text">
+      <div class="photo-card-label">
+        <span class="photo-card-title">History</span>
+        <span class="photo-card-desc">Boryslaw, the Ghetto, and the Jewish community of eastern Galicia</span>
+      </div>
+    </a>
+
+    <a href="/family/" class="photo-card">
+      <img
+        src="/photos/personal_Fraiman_Familiy_Photos.jpg"
+        alt="Fraiman family group photograph"
+      />
+      <div class="photo-card-label">
+        <span class="photo-card-title">Family Tree</span>
+        <span class="photo-card-desc">Known relatives and name variants</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ── Timeline strip ── -->
+  <section class="timeline-strip">
+    <p class="timeline-heading">Key Dates</p>
+    <ul class="timeline-list">
+      <li class="milestone">
+        <span class="milestone-year">1910</span>
+        <span class="milestone-text">Born in Boryslaw, Galicia (then Austria-Hungary), to Itzhak and Frieda Freiman</span>
+      </li>
+      <li class="milestone">
+        <span class="milestone-year">1939–41</span>
+        <span class="milestone-text">Soviet occupation of eastern Galicia following the Molotov–Ribbentrop Pact; daily life disrupted</span>
+      </li>
+      <li class="milestone">
+        <span class="milestone-year">1941–44</span>
+        <span class="milestone-text">German occupation; Boryslaw Ghetto established; deportations to Belzec extermination camp — Herman survives</span>
+      </li>
+      <li class="milestone">
+        <span class="milestone-year">1944</span>
+        <span class="milestone-text">Red Army liberates Boryslaw; Herman among the survivors</span>
+      </li>
+      <li class="milestone">
+        <span class="milestone-year">1950s</span>
+        <span class="milestone-text">Emigrates to Israel; remarries; builds a new life in Haifa</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── About this archive ── -->
+  <section class="about-archive">
+    <h2>About This Archive</h2>
+    <p>
+      This memorial website was created by Herman's descendants to preserve and share
+      what is known of his life. Primary sources include the Arolsen Archives (ITS),
+      Yad Vashem records, personal documents, and photographs held by the family in Israel.
+      The archive is ongoing — corrections and additional testimony are welcome.
     </p>
   </section>
 
-  <div class="section-cards">
-    {sections.map(s => (
-      <a href={s.url} class="section-card">
-        <span class="card-title">{s.title}</span>
-        <span class="card-desc">{s.desc}</span>
-      </a>
-    ))}
-  </div>
-
-  <p class="phase-notice">
-    Visual redesign in progress — full photo layout coming in Phase 2.
-  </p>
 </BaseLayout>

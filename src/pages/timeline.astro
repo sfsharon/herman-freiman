@@ -1,62 +1,182 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const periods = [
+  {
+    title: "Pre-War Period",
+    years: "1910–1941",
+    events: [
+      { year: "1910",     desc: "Born in Boryslaw, Galicia (then Austria-Hungary/Poland)", source: "DP-2 Cards, Polish Registry" },
+      { year: "Pre-1938", desc: "Last permanent residence: Boryslaw, Poland", source: "ITS Certificate 413381" },
+      { year: "Pre-1941", desc: "Married first wife; children born (names unknown)", source: "Family oral history" },
+      { year: "—",        desc: "Worked as tailor (Schneider)", source: "All documents" },
+    ],
+    note: null,
+  },
+  {
+    title: "War Period",
+    years: "1941–1944",
+    events: [
+      { year: "1 Jul 1941",  desc: "German occupation of Boryslaw begins", source: "Yad Vashem Pinkas HaKehillot" },
+      { year: "Jul 1941",    desc: "Confined to Ghetto Boryslaw", source: "1959 ITS Form, TD File" },
+      { year: "1941–1944",   desc: "Forced labor in ZAL (Zwangsarbeitslager) Boryslaw", source: "TD File 790 495" },
+      { year: "Unknown",     desc: "First wife and children perished", source: "Family history" },
+      { year: "Mar 1944",    desc: "Liberation / end of Boryslaw ZAL period", source: "1959 ITS Form" },
+    ],
+    note: "The Boryslaw ZAL was a forced labor camp serving the local oil industry. Herman's profession as a tailor (Schneider) — a skill valued by the Germans — is believed to have been a factor in his survival. Only approximately 400–600 Jews from Boryslaw survived the Holocaust.",
+  },
+  {
+    title: "Post-War Period",
+    years: "1945–1948",
+    events: [
+      { year: "1945",        desc: "Married Ester (née unknown) in Poland", source: "1959 ITS Form" },
+      { year: "1945–1946",   desc: "Resided at Bielawa, Wolności 131, Poland", source: "Polish Jewish Registry" },
+      { year: "4 Sep 1946",  desc: "Arrived at DP Camp 678, Ulm Boelcke Kaserne", source: "DP-2 Card, DP-3 Card" },
+      { year: "20 Nov 1946", desc: "Registered again at Ulm DP Camp", source: "DP-2 Card" },
+      { year: "1 Jul 1947",  desc: "Still at Ulm Boelcke Kaserne DP Camp", source: "DP Camp List" },
+      { year: "30 Sep 1948", desc: "Left Ulm DP Camp for Israel", source: "Emigration List Nr. 19" },
+    ],
+    note: null,
+  },
+  {
+    title: "Israel Period",
+    years: "1948 onwards",
+    events: [
+      { year: "4 Nov 1948",  desc: "Emigrated to Israel on ship Negba with wife Ester", source: "ITS Certificate, 1959 Form" },
+      { year: "Post-1948",   desc: "Settled at Hugo Moller Street 28, Kfar Ata-Giwat Ata", source: "All ITS documents" },
+      { year: "20 Oct 1959", desc: "Signed Power of Attorney for Dr. Herbert Mannheim (restitution)", source: "Vollmacht document" },
+      { year: "26 Feb 1960", desc: "ITS Certificate of Residence issued", source: "Certificate No. 413381" },
+    ],
+    note: "The Negba was one of several ships used by the nascent State of Israel to transport displaced persons from European DP camps. The family settled in Kfar Ata (today Kiryat Ata), a town near Haifa.",
+  },
+];
 ---
 
 <BaseLayout
   title="Timeline"
   description="Herman Freiman's documented journey from birth in Boryslaw through the Holocaust to emigration and life in Israel."
 >
-  <article class="prose">
-    <h1>Chronological Timeline</h1>
-    <p>A chronological reconstruction of Herman Freiman's life, compiled from Arolsen Archives, Yad Vashem, and family records. Gaps remain in the wartime period — see <a href="/research/">Research Notes</a> for known unknowns and next steps.</p>
+  <div class="tl-page">
+    <div class="prose tl-intro">
+      <h1>Chronological Timeline</h1>
+      <p>A chronological reconstruction of Herman Freiman's life, compiled from Arolsen Archives, Yad Vashem, and family records. Gaps remain in the wartime period — see <a href="/research/">Research Notes</a> for known unknowns and next steps.</p>
+    </div>
 
-    <h2>Pre-War Period (1910–1941)</h2>
-    <table>
-      <thead><tr><th>Date</th><th>Event</th><th>Source</th></tr></thead>
-      <tbody>
-        <tr><td>March 2, 1910</td><td>Born in Boryslaw, Galicia (then Austria-Hungary/Poland)</td><td>DP-2 Cards, Polish Registry</td></tr>
-        <tr><td>Pre-1938</td><td>Last permanent residence: Boryslaw, Poland</td><td>ITS Certificate 413381</td></tr>
-        <tr><td>Pre-1941</td><td>Married first wife; children born (names unknown)</td><td>Family oral history</td></tr>
-        <tr><td>Unknown</td><td>Worked as tailor (Schneider)</td><td>All documents</td></tr>
-      </tbody>
-    </table>
-
-    <h2>War Period (1941–1944)</h2>
-    <table>
-      <thead><tr><th>Date</th><th>Event</th><th>Source</th></tr></thead>
-      <tbody>
-        <tr><td>July 1, 1941</td><td>German occupation of Boryslaw begins</td><td>Yad Vashem Pinkas HaKehillot</td></tr>
-        <tr><td>July 1941</td><td>Confined to Ghetto Boryslaw</td><td>1959 ITS Form, TD File</td></tr>
-        <tr><td>1941–1944</td><td>Forced labor in ZAL (Zwangsarbeitslager) Boryslaw</td><td>TD File 790 495</td></tr>
-        <tr><td>Unknown</td><td>First wife and children perished</td><td>Family history</td></tr>
-        <tr><td>March 1944</td><td>Liberation / end of Boryslaw ZAL period</td><td>1959 ITS Form</td></tr>
-      </tbody>
-    </table>
-    <p>The Boryslaw ZAL was a forced labor camp serving the local oil industry. Herman's profession as a tailor (<em>Schneider</em>) — a skill valued by the Germans — is believed to have been a factor in his survival. Only approximately 400–600 Jews from Boryslaw survived the Holocaust.</p>
-
-    <h2>Post-War Period (1945–1948)</h2>
-    <table>
-      <thead><tr><th>Date</th><th>Event</th><th>Source</th></tr></thead>
-      <tbody>
-        <tr><td>1945</td><td>Married Ester (née unknown) in Poland</td><td>1959 ITS Form</td></tr>
-        <tr><td>1945–1946</td><td>Resided at Bielawa, Wolności 131, Poland</td><td>Polish Jewish Registry</td></tr>
-        <tr><td>Sept 4, 1946</td><td>Arrived at DP Camp 678, Ulm Boelcke Kaserne</td><td>DP-2 Card, DP-3 Card</td></tr>
-        <tr><td>Nov 20, 1946</td><td>Registered again at Ulm DP Camp</td><td>DP-2 Card</td></tr>
-        <tr><td>July 1, 1947</td><td>Still at Ulm Boelcke Kaserne DP Camp</td><td>DP Camp List</td></tr>
-        <tr><td>Sept 30, 1948</td><td>Left Ulm DP Camp for Israel</td><td>Emigration List Nr. 19</td></tr>
-      </tbody>
-    </table>
-
-    <h2>Israel Period (1948 onwards)</h2>
-    <table>
-      <thead><tr><th>Date</th><th>Event</th><th>Source</th></tr></thead>
-      <tbody>
-        <tr><td>Nov 4, 1948</td><td>Emigrated to Israel on ship <em>Negba</em> with wife Ester</td><td>ITS Certificate, 1959 Form</td></tr>
-        <tr><td>Post-1948</td><td>Settled at Hugo Moller Street 28, Kfar Ata-Giwat Ata</td><td>All ITS documents</td></tr>
-        <tr><td>Oct 20, 1959</td><td>Signed Power of Attorney for Dr. H. Mannheim (restitution)</td><td>Vollmacht document</td></tr>
-        <tr><td>Feb 26, 1960</td><td>ITS Certificate of Residence issued</td><td>Certificate No. 413381</td></tr>
-      </tbody>
-    </table>
-    <p>The <em>Negba</em> was one of several ships used by the nascent State of Israel to transport displaced persons from European DP camps. The family settled in Kfar Ata (today Kiryat Ata), a town near Haifa.</p>
-  </article>
+    {periods.map(period => (
+      <section class="vt-period">
+        <div class="vt-period-header">
+          <span class="vt-period-title">{period.title}</span>
+          <span class="vt-period-years">{period.years}</span>
+        </div>
+        <div class="vt-events">
+          {period.events.map(event => (
+            <div class="vt-event">
+              <span class="vt-year">{event.year}</span>
+              <div class="vt-body">
+                <p class="vt-desc">{event.desc}</p>
+                <span class="vt-source">{event.source}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        {period.note && <p class="vt-note">{period.note}</p>}
+      </section>
+    ))}
+  </div>
 </BaseLayout>
+
+<style>
+  .tl-page {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 1.5rem 2rem;
+  }
+
+  .tl-intro {
+    margin-bottom: 2.5rem;
+  }
+
+  /* Period section */
+  .vt-period {
+    margin-bottom: 2.5rem;
+  }
+
+  .vt-period-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .vt-period-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    color: var(--color-charcoal);
+  }
+
+  .vt-period-years {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: 0.08em;
+  }
+
+  /* Events list */
+  .vt-events {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vt-event {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 1rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid #ede4d0;
+  }
+
+  .vt-year {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: 0.04em;
+    text-align: right;
+    padding-top: 0.1rem;
+    padding-right: 0.5rem;
+    border-right: 2px solid var(--color-border);
+    line-height: 1.4;
+  }
+
+  .vt-body {
+    padding-top: 0.05rem;
+  }
+
+  .vt-desc {
+    font-size: 0.9rem;
+    color: var(--color-charcoal);
+    margin: 0 0 0.15rem;
+    line-height: 1.5;
+  }
+
+  .vt-source {
+    font-size: 0.7rem;
+    color: var(--color-mid-gray);
+    font-style: italic;
+  }
+
+  /* Narrative note after a period */
+  .vt-note {
+    font-size: 0.86rem;
+    color: var(--color-mid-gray);
+    background: var(--color-parchment);
+    border-left: 3px solid var(--color-accent);
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+    border-radius: 0 2px 2px 0;
+    line-height: 1.65;
+  }
+</style>

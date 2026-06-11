@@ -8,68 +8,199 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
   <article class="prose">
     <h1>Documents &amp; Transcriptions</h1>
-    <p>This page contains transcriptions and translations of key primary source documents, with the original German or Polish text alongside English translations.</p>
+    <p>Key primary source documents, with original German or Polish text alongside English translations.</p>
 
+    <!-- Restitution overview -->
     <h2>German Restitution (Wiedergutmachung)</h2>
     <p>After emigrating to Israel, Herman pursued <em>Wiedergutmachung</em> (restitution/reparations) from West Germany for damages suffered during the Nazi persecution.</p>
     <table>
       <thead><tr><th>Field</th><th>Details</th></tr></thead>
       <tbody>
         <tr><td>Restitution File Number</td><td>E.A. Stuttgart 11 672(o)</td></tr>
-        <tr><td>Attorney</td><td>Dr. Herbert Mannheim, Hajam Rd. 6, Mt. Carmel, Haifa, Israel</td></tr>
+        <tr><td>Attorney</td><td>Dr. Herbert Mannheim, Hajam Rd. 6, Mt. Carmel, Haifa</td></tr>
         <tr><td>Power of Attorney Date</td><td>October 20, 1959</td></tr>
         <tr><td>Certificate Issued</td><td>February 26, 1960 (No. 413381)</td></tr>
-        <tr><td>Certificates Requested</td><td>Inhaftierungsbescheinigung (Certificate of Incarceration), Aufenthaltsbescheinigung (Certificate of Residence)</td></tr>
+        <tr><td>Certificates Requested</td><td>Inhaftierungsbescheinigung · Aufenthaltsbescheinigung</td></tr>
       </tbody>
     </table>
 
-    <h3>Power of Attorney (Vollmacht) — October 20, 1959</h3>
-    <p><strong>Original German:</strong></p>
-    <blockquote>
-      <em>Ich, der/die unterzeichnete, Herman Freiman, wohnhaft in Kfar Ata-Giwat Ata/Israel, Hugo Mollerstr. 28, bevollmächtige hiermit Herrn Dr. Herbert Mannheim, Haifa/Israel, Hajam Rd. 6, Mt. Carmel, sämtliche Auskünfte u. Erkundigungen, die sich auf Entschädigungsansprüche wegen Schaden an Leben, Freiheit und Gesundheit für mich u. meine Familienangehörigen beziehen, von dem Internationalen Suchdienst des Roten Kreuzes in Arolsen (Waldeck) einzuziehen.</em>
-    </blockquote>
-    <p><strong>English Translation:</strong></p>
-    <blockquote>
-      I, the undersigned, Herman Freiman, residing at Kfar Ata-Giwat Ata/Israel, Hugo Moller Street 28, hereby authorize Dr. Herbert Mannheim, Haifa/Israel, Hajam Road 6, Mt. Carmel, to obtain all information and inquiries relating to compensation claims for damages to life, liberty, and health for myself and my family members from the International Tracing Service of the Red Cross in Arolsen (Waldeck).
-    </blockquote>
+    <!-- Document card: Vollmacht -->
+    <div class="doc-card">
+      <div class="doc-card-head">
+        <span class="doc-card-title">Power of Attorney (Vollmacht)</span>
+        <span class="doc-card-date">October 20, 1959</span>
+      </div>
+      <div class="doc-card-body">
+        <div class="doc-pair">
+          <div>
+            <span class="doc-lang-label">Original German</span>
+            <p class="doc-text"><em>Ich, der/die unterzeichnete, Herman Freiman, wohnhaft in Kfar Ata-Giwat Ata/Israel, Hugo Mollerstr. 28, bevollmächtige hiermit Herrn Dr. Herbert Mannheim, Haifa/Israel, Hajam Rd. 6, Mt. Carmel, sämtliche Auskünfte u. Erkundigungen, die sich auf Entschädigungsansprüche wegen Schaden an Leben, Freiheit und Gesundheit für mich u. meine Familienangehörigen beziehen, von dem Internationalen Suchdienst des Roten Kreuzes in Arolsen (Waldeck) einzuziehen.</em></p>
+          </div>
+          <div>
+            <span class="doc-lang-label">English Translation</span>
+            <p class="doc-text">I, the undersigned, Herman Freiman, residing at Kfar Ata-Giwat Ata/Israel, Hugo Moller Street 28, hereby authorize Dr. Herbert Mannheim, Haifa/Israel, Hajam Road 6, Mt. Carmel, to obtain all information and inquiries relating to compensation claims for damages to life, liberty, and health for myself and my family members from the International Tracing Service of the Red Cross in Arolsen (Waldeck).</p>
+          </div>
+        </div>
+        <figure class="doc-figure">
+          <img src="/photos/Herman_Fraiman_Signature.jpg" alt="Herman Freiman's handwritten signature" />
+          <figcaption>Herman Freiman's handwritten signature on the Power of Attorney, October 20, 1959.</figcaption>
+        </figure>
+      </div>
+    </div>
 
-    <figure>
-      <img src="/photos/Herman_Fraiman_Signature.jpg" alt="Herman Freiman's handwritten signature" />
-      <figcaption>Herman Freiman's handwritten signature on the Power of Attorney, October 20, 1959.</figcaption>
-    </figure>
+    <!-- Document card: ITS Summary Card -->
+    <div class="doc-card">
+      <div class="doc-card-head">
+        <span class="doc-card-title">ITS Summary Card</span>
+        <span class="doc-card-date">TD File 790 495</span>
+      </div>
+      <div class="doc-card-body">
+        <p class="doc-summary">The central record in the Arolsen Archives for Herman Freiman. It summarizes his wartime imprisonment, postwar movements, and emigration.</p>
+        <div class="doc-pair">
+          <div>
+            <span class="doc-lang-label">Original German</span>
+            <p class="doc-text"><em>Name: FREIMAN Herman od. FRAJMAN od. FREIMANN / Eltern: Feibel u. Shifra ROSEN / Geb.: 2.3.1905 in Boryslaw / Nat.: israel./poln. / 7.41-3.44 Gh. u. ZAL Boryslaw / 45-46 Polen / 46-48 DP.Lg.Ulm / 4.11.48 n.Israel m.'Negba' ausgew. / LA.f.Wg.Stgt. dch.Dr.H.Mannheim, Haifa</em></p>
+          </div>
+          <div>
+            <span class="doc-lang-label">English Translation</span>
+            <p class="doc-text">Name: FREIMAN Herman or FRAJMAN or FREIMANN / Parents: Feibel and Shifra ROSEN / Born: 2.3.1905 in Boryslaw / Nationality: Israeli/Polish / July 1941–March 1944 Ghetto and Forced Labor Camp Boryslaw / 1945–46 Poland / 1946–48 DP Camp Ulm / November 4, 1948 emigrated to Israel on 'Negba' / State Archive Stuttgart through Dr. H. Mannheim, Haifa</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <h2>ITS Summary Card (TD 790 495)</h2>
-    <p>This card is the central record in the Arolsen Archives for Herman Freiman, file TD 790 495. It summarizes his wartime imprisonment, postwar movements, and emigration.</p>
-    <p><strong>Original German:</strong></p>
-    <blockquote>
-      <em>Name: FREIMAN Herman od. FRAJMAN od. FREIMANN / Eltern: Feibel u. Shifra ROSEN / Geb.: 2.3.1905 in Boryslaw / Nat.: israel./poln. / 7.41-3.44 Gh. u. ZAL Boryslaw / 45-46 Polen / 46-48 DP.Lg.Ulm / 4.11.48 n.Israel m.'Negba' ausgew. / LA.f.Wg.Stgt. dch.Dr.H.Mannheim, Haifa</em>
-    </blockquote>
-    <p><strong>English Translation:</strong></p>
-    <blockquote>
-      Name: FREIMAN Herman or FRAJMAN or FREIMANN / Parents: Feibel and Shifra ROSEN / Born: 2.3.1905 in Boryslaw / Nationality: Israeli/Polish / July 1941–March 1944 Ghetto and Forced Labor Camp Boryslaw / 1945–46 Poland / 1946–48 DP Camp Ulm / November 4, 1948 emigrated to Israel on 'Negba' / State Archive Stuttgart through Dr. H. Mannheim, Haifa
-    </blockquote>
+    <!-- Document card: Certificate of Residence -->
+    <div class="doc-card">
+      <div class="doc-card-head">
+        <span class="doc-card-title">Certificate of Residence — Key Fields</span>
+        <span class="doc-card-date">February 26, 1960 · No. 413381</span>
+      </div>
+      <div class="doc-card-body">
+        <div class="doc-pair">
+          <div>
+            <span class="doc-lang-label">Original German</span>
+            <p class="doc-text"><em>Über die Inhaftierung liegen keine Unterlagen vor. Abweichung: Geburtsdatum. Faivel = Feibel.</em></p>
+          </div>
+          <div>
+            <span class="doc-lang-label">English Translation</span>
+            <p class="doc-text">No documents exist regarding the concentration camp incarceration. Discrepancy: Birth date. Faivel = Feibel [same name — confirming the variants refer to the same person].</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <h2>Certificate of Residence — Key Fields (February 26, 1960)</h2>
-    <p><strong>Original German:</strong></p>
-    <blockquote>
-      <em>Über die Inhaftierung liegen keine Unterlagen vor. Abweichung: Geburtsdatum. Faivel = Feibel.</em>
-    </blockquote>
-    <p><strong>English Translation:</strong></p>
-    <blockquote>
-      No documents exist regarding the concentration camp incarceration. Discrepancy: Birth date. Faivel = Feibel [same name — a note confirming the name variants refer to the same person].
-    </blockquote>
+    <!-- Document card: Polish Registry -->
+    <div class="doc-card">
+      <div class="doc-card-head">
+        <span class="doc-card-title">Polish Jewish Registry Entry</span>
+        <span class="doc-card-date">January 1947 · Warsaw</span>
+      </div>
+      <div class="doc-card-body">
+        <p class="doc-summary">Herman and Ester appeared in the January 1947 alphabetical registry of Polish Jews compiled by the Central Committee of Polish Jews in Warsaw, while living in Bielawa.</p>
+        <div class="doc-pair">
+          <div>
+            <span class="doc-lang-label">Polish Header</span>
+            <p class="doc-text"><em>CENTRALNY KOMITET ŻYDÓW POLSKICH, WARSZAWA, SIENNA 60 — WYKAZ ALFABETYCZNY ŻYDÓW POLSKICH, Lista Nr. 3, Lit. F.</em></p>
+          </div>
+          <div>
+            <span class="doc-lang-label">Herman's Entry</span>
+            <p class="doc-text">Frajman Herman, 1910, Fajwel, Szyfra Borysław, Bielawa Wolności 131<br /><em>(Name · Birth year · Father · Mother · Hometown · Address)</em></p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <h2>Polish Jewish Registry Entry (January 1947)</h2>
-    <p>Herman and Ester appeared in the January 1947 alphabetical registry of Polish Jews compiled by the Central Committee of Polish Jews in Warsaw, at the time they were living in Bielawa.</p>
-    <p><strong>Polish Header:</strong></p>
-    <blockquote>
-      <em>CENTRALNY KOMITET ŻYDÓW POLSKICH, WARSZAWA, SIENNA 60 — WYKAZ ALFABETYCZNY ŻYDÓW POLSKICH, Lista Nr. 3, Lit. F.</em><br />
-      (Central Committee of Polish Jews, Warsaw, Sienna 60 — Alphabetical List of Polish Jews, List No. 3, Letter F.)
-    </blockquote>
-    <p><strong>Herman's Entry:</strong></p>
-    <blockquote>
-      Frajman Herman, 1910, Fajwel, Szyfra Borysław, Bielawa Wolności 131<br />
-      <em>(Name: Frajman Herman / Birth year: 1910 / Father: Fajwel / Mother: Szyfra / Hometown: Borysław / Address: Bielawa, Wolności 131)</em>
-    </blockquote>
   </article>
 </BaseLayout>
+
+<style>
+  .doc-card {
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+
+  .doc-card-head {
+    background: #1a2d4a;
+    padding: 0.65rem 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .doc-card-title {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c8d8e8;
+  }
+
+  .doc-card-date {
+    font-size: 0.68rem;
+    color: #7a9aba;
+    letter-spacing: 0.04em;
+  }
+
+  .doc-card-body {
+    background: var(--color-parchment);
+    padding: 1.25rem;
+  }
+
+  .doc-summary {
+    font-size: 0.86rem;
+    color: var(--color-mid-gray);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .doc-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 600px) {
+    .doc-pair { grid-template-columns: 1fr; }
+  }
+
+  .doc-lang-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.63rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.45rem;
+  }
+
+  .doc-text {
+    font-size: 0.86rem;
+    color: var(--color-charcoal);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .doc-figure {
+    margin-top: 1.25rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .doc-figure img {
+    max-width: 320px;
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+  }
+
+  .doc-figure figcaption {
+    font-size: 0.78rem;
+    color: var(--color-mid-gray);
+    font-style: italic;
+    margin-top: 0.4rem;
+  }
+</style>

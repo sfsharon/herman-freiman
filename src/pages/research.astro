@@ -42,11 +42,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </table>
 
     <h2>Did Herman Have a Concentration Camp Tattoo?</h2>
-    <p><strong>Conclusion: Herman Freiman almost certainly did NOT have a concentration camp tattoo.</strong></p>
+
+    <div class="conclusion-box">
+      <span class="conclusion-label">Conclusion</span>
+      <p>Herman Freiman almost certainly did <strong>not</strong> have a concentration camp tattoo. Tattoos were used exclusively in the Auschwitz complex. Herman was held in a ZAL (forced labor camp) in Boryslaw — a legally distinct facility. The ITS Certificate explicitly confirms there are no KZ incarceration records.</p>
+    </div>
+
     <p><strong>Evidence and Reasoning:</strong></p>
     <ul>
       <li><strong>Tattoos were Auschwitz-specific:</strong> The practice of tattooing prisoner numbers was unique to the Auschwitz concentration camp complex. No other camp system — including ghettos, labor camps, or other KZ facilities — tattooed prisoners.</li>
-      <li><strong>Herman was in a ZAL, not a KZ:</strong> All documents consistently record <em>"Gh. u. ZAL Boryslaw"</em> — Ghetto and Zwangsarbeitslager (Forced Labor Camp) Boryslaw. A ZAL was a forced labor facility, legally and administratively distinct from a Konzentrationslager (KZ/concentration camp).</li>
+      <li><strong>Herman was in a ZAL, not a KZ:</strong> All documents consistently record <em>"Gh. u. ZAL Boryslaw"</em> — Ghetto and Zwangsarbeitslager (Forced Labor Camp) Boryslaw. A ZAL was legally and administratively distinct from a Konzentrationslager (KZ/concentration camp).</li>
       <li><strong>The ITS Certificate explicitly states:</strong> <em>"Über die Inhaftierung liegen keine Unterlagen vor"</em> — No documents exist regarding concentration camp (KZ) incarceration.</li>
       <li><strong>Local labor camp context:</strong> The Boryslaw ZAL served the local oil industry. Workers were kept in place rather than transported to the Auschwitz complex.</li>
       <li><strong>Survival factors:</strong> His profession as a tailor (<em>Schneider</em>) provided the Germans with a reason to keep him in local forced labor rather than deporting him to an extermination camp.</li>
@@ -58,7 +63,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <ul>
       <li><strong>Arolsen Archives Online Collections:</strong> <a href="https://collections.arolsen-archives.org" target="_blank" rel="noopener">collections.arolsen-archives.org</a> — Herman's TD File 790 495 is already located here. Additional documents may exist.</li>
       <li><strong>Yad Vashem Central Database:</strong> <a href="https://yvng.yadvashem.org" target="_blank" rel="noopener">yvng.yadvashem.org</a> — Pages of Testimony, deportation lists, and community records.</li>
-      <li><strong>Landesarchiv Baden-Württemberg</strong> — for complete restitution file E.A. Stuttgart 11 672(o): <a href="https://www.landesarchiv-bw.de" target="_blank" rel="noopener">landesarchiv-bw.de</a>. The full restitution file likely contains a detailed personal testimony about Herman's wartime experiences — this is probably the highest-value untapped source.</li>
+      <li><strong>Landesarchiv Baden-Württemberg</strong> — for complete restitution file E.A. Stuttgart 11 672(o): <a href="https://www.landesarchiv-bw.de" target="_blank" rel="noopener">landesarchiv-bw.de</a>. The full restitution file likely contains Herman's own personal testimony — probably the highest-value untapped source.</li>
       <li><strong>Israel State Archives</strong> — for ship <em>Negba</em> passenger list (November 1948) and immigration records.</li>
     </ul>
 
@@ -79,12 +84,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <h2>Recommended Next Steps</h2>
     <ol>
-      <li><strong>Request the complete restitution file</strong> — Contact Landesarchiv Baden-Württemberg for file E.A. Stuttgart 11 672(o). This file almost certainly contains Herman's own written or transcribed testimony about his wartime experiences, which would fill the largest gap in the documentary record.</li>
+      <li><strong>Request the complete restitution file</strong> — Contact Landesarchiv Baden-Württemberg for file E.A. Stuttgart 11 672(o). This file almost certainly contains Herman's own written or transcribed testimony about his wartime experiences.</li>
       <li><strong>Search Pages of Testimony at Yad Vashem</strong> — Submit or search for Pages of Testimony for FREIMAN/FRAJMAN family members from Boryslaw. This may reveal names of the first wife and children.</li>
       <li><strong>Locate the Boryslaw Yizkor Book</strong> — Search survivor testimonies for mentions of the Freiman family. JewishGen has a translation project for many Yizkor books.</li>
       <li><strong>Record oral histories from living family members</strong> — Descendants who knew Herman may have heard names, stories, or details not captured in any document.</li>
-      <li><strong>Request the ship <em>Negba</em> passenger list</strong> — The Israel State Archives hold immigration records from 1948. The passenger manifest may include additional family members or provide more detail about Herman and Ester's arrival.</li>
+      <li><strong>Request the ship <em>Negba</em> passenger list</strong> — The Israel State Archives hold immigration records from 1948. The passenger manifest may include additional family members.</li>
       <li><strong>Search DP Camp Ulm records</strong> — The Arolsen Archives hold extensive Displaced Persons camp documentation. Additional 1946–1948 records may exist beyond the DP-2 and DP-3 cards already retrieved.</li>
     </ol>
   </article>
 </BaseLayout>
+
+<style>
+  .conclusion-box {
+    background: var(--color-parchment);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0 3px 3px 0;
+    padding: 1rem 1.25rem;
+    margin: 1.25rem 0 1.5rem;
+  }
+
+  .conclusion-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .conclusion-box p {
+    font-size: 0.92rem;
+    color: var(--color-charcoal);
+    line-height: 1.65;
+    margin: 0;
+  }
+</style>

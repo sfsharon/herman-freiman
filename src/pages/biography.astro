@@ -8,36 +8,52 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
   <article class="prose">
     <h1>Biography</h1>
-    <p>This page presents consolidated biographical data compiled from Arolsen Archives (International Tracing Service), Yad Vashem records, and personal family documents.</p>
+    <p>Consolidated biographical data compiled from Arolsen Archives (ITS), Yad Vashem records, and personal family documents.</p>
 
-    <h2>Personal Identification</h2>
-    <table>
-      <thead><tr><th>Field</th><th>Information</th></tr></thead>
-      <tbody>
-        <tr><td>Full Name</td><td>Herman FREIMAN (also: FRAJMAN, FREIMANN)</td></tr>
-        <tr><td>Hebrew Name</td><td>צבי (Zvi)</td></tr>
-        <tr><td>Birth Date</td><td>March 2, 1910 (Note: Some documents show 1905)</td></tr>
-        <tr><td>Birthplace</td><td>Boryslaw (Boryslav), Galicia, Poland (now Ukraine)</td></tr>
-        <tr><td>Religion</td><td>Jewish (Jude)</td></tr>
-        <tr><td>Profession</td><td>Schneider (Tailor)</td></tr>
-        <tr><td>Languages</td><td>Polish, Yiddish (Jewish), Russian, Sign Language</td></tr>
-        <tr><td>Nationality</td><td>Polish (fr. polnisch), later Israeli</td></tr>
-      </tbody>
-    </table>
+    <!-- Portrait + identification table side by side -->
+    <div class="bio-header">
+      <figure class="bio-portrait">
+        <img
+          src="/photos/personal_Zvi_Fraiman_With_Suite_Age_40_Approx.png"
+          alt="Herman Zvi Freiman, circa age 40"
+        />
+        <figcaption>Herman (Zvi) Freiman — portrait, circa age 40. Likely taken in Kfar Ata in the 1950s.</figcaption>
+      </figure>
+      <div class="bio-keyinfo">
+        <div class="bio-section-label">Personal Identification</div>
+        <table>
+          <tbody>
+            <tr><td>Full Name</td><td>Herman FREIMAN (also: FRAJMAN, FREIMANN)</td></tr>
+            <tr><td>Hebrew Name</td><td>צבי (Zvi)</td></tr>
+            <tr><td>Birth Date</td><td>March 2, 1910 (some documents show 1905)</td></tr>
+            <tr><td>Birthplace</td><td>Boryslaw, Galicia, Poland (now Ukraine)</td></tr>
+            <tr><td>Religion</td><td>Jewish (Jude)</td></tr>
+            <tr><td>Profession</td><td>Schneider (Tailor)</td></tr>
+            <tr><td>Languages</td><td>Polish, Yiddish, Russian, Sign Language</td></tr>
+            <tr><td>Nationality</td><td>Polish (polnisch), later Israeli</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <blockquote class="bio-pull">
+      Herman Zvi Freiman was born in Boryslaw in 1910.<br />
+      His wife and children did not survive the Holocaust. He did.
+    </blockquote>
 
     <h2>Parents</h2>
     <table>
       <thead><tr><th>Relation</th><th>Name</th></tr></thead>
       <tbody>
         <tr><td>Father</td><td>Feibel FREIMAN (variants: Faivel, Faifel, Fajwel)</td></tr>
-        <tr><td>Mother</td><td>Shifra ROSEN (variants: Schifra, Szyfra) — née/geb. Rosen</td></tr>
+        <tr><td>Mother</td><td>Shifra ROSEN (variants: Schifra, Szyfra) — née Rosen</td></tr>
       </tbody>
     </table>
 
     <h2>Marriage &amp; Family</h2>
 
     <h3>First Marriage (Pre-War)</h3>
-    <p>Herman had a wife and children before WWII who perished during the Holocaust. No documentary records of their names have been found in the available sources. The 1959 ITS form lists his marital status "at the time of incarceration" as <em>ledig</em> (single), which may have been an administrative simplification or error, since family oral history confirms a pre-war family.</p>
+    <p>Herman had a wife and children before WWII who perished during the Holocaust. No documentary records of their names have been found. The 1959 ITS form lists his marital status "at the time of incarceration" as <em>ledig</em> (single), which may have been an administrative simplification or error — family oral history confirms the pre-war family.</p>
 
     <h3>Second Marriage</h3>
     <table>
@@ -79,3 +95,55 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </ul>
   </article>
 </BaseLayout>
+
+<style>
+  .bio-header {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 620px) {
+    .bio-header { grid-template-columns: 1fr; }
+  }
+
+  .bio-portrait img {
+    width: 100%;
+    border-radius: 2px;
+    filter: sepia(12%) contrast(97%);
+  }
+  .bio-portrait figcaption {
+    font-size: 0.78rem;
+    color: var(--color-mid-gray);
+    font-style: italic;
+    margin-top: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .bio-section-label {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.6rem;
+  }
+
+  /* Remove top margin from table immediately following bio-section-label */
+  .bio-keyinfo table {
+    margin-top: 0;
+  }
+
+  .bio-pull {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--color-charcoal);
+    border-left: 3px solid var(--color-accent);
+    padding-left: 1.25rem;
+    margin: 2rem 0;
+    line-height: 1.7;
+  }
+</style>

@@ -10,6 +10,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h1>Family Tree</h1>
     <p>The following family structure has been established from available documentation. Significant gaps remain: the name of Herman's first wife and their children are not recorded in any surviving document. The names of Herman and Ester's three sons also do not appear in the documentary record, though they are visible in the family photograph.</p>
 
+    <!-- Family photograph -->
+    <figure class="family-photo">
+      <img
+        src="/photos/personal_Fraiman_Familiy_Photos.jpg"
+        alt="Freiman family photographs — Zvi, Ester, and their three sons"
+      />
+      <figcaption>Freiman family photographs — Zvi, Ester, and their three sons. Israel, likely 1950s–1960s.</figcaption>
+    </figure>
+
     <h2>Family Structure</h2>
     <pre class="family-tree">FREIMAN / FRAJMAN Family of Boryslaw
 
@@ -60,6 +69,24 @@ Boryslaw, Poland                         │
 </BaseLayout>
 
 <style>
+  .family-photo {
+    margin: 1.5rem 0 2rem;
+  }
+  .family-photo img {
+    width: 100%;
+    max-width: 560px;
+    border-radius: 2px;
+    filter: sepia(15%) contrast(97%);
+    border: 1px solid var(--color-border);
+  }
+  .family-photo figcaption {
+    font-size: 0.78rem;
+    color: var(--color-mid-gray);
+    font-style: italic;
+    margin-top: 0.45rem;
+    line-height: 1.4;
+  }
+
   .family-tree {
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.82rem;
@@ -70,7 +97,7 @@ Boryslaw, Poland                         │
     padding: 1.25rem 1.5rem;
     overflow-x: auto;
     white-space: pre;
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem;
     color: var(--color-charcoal);
   }
 </style>

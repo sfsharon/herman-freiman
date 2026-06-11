@@ -392,8 +392,18 @@ This is the recommended sequence:
    - Photo section cards (6 cards with real photos and gradient overlays)
    - Timeline strip (5 key milestones, 1910–1950s)
    - About this archive section
-3. **Phase 3 — Content migration:** Move the existing Markdown content from `content/` into Astro pages, replacing Hugo shortcodes with Astro components or standard Markdown image syntax.
-4. **Phase 4 — Custom page layouts:** Build designed pages for Gallery, Timeline, Documents, Biography, Family Tree, History, and Research Notes.
+3. **Phase 3 — Content migration** ✅ *Completed 2026-06-11*
+   - All content migrated from `content/*.md` into `src/pages/*.astro`
+   - Hugo `{{< figure >}}` shortcodes replaced with standard HTML `<figure>` elements
+   - `content/` directory deleted; `.gitmodules` and `.hugo_build.lock` removed
+4. **Phase 4 — Custom page layouts** ✅ *Completed 2026-06-11*
+   - **Biography:** portrait-led header (photo + identification table side by side), pull quote
+   - **Timeline:** visual event list with year badges, accent border, period callout notes
+   - **Documents:** archival cards per document (navy header, parchment body, German/English columns)
+   - **Family Tree:** family photograph above ASCII tree, styled monospace tree block
+   - **History:** key-facts stats bar (population numbers, dates) above narrative prose
+   - **Research Notes:** styled conclusion box for tattoo question; archive links
+   - **Gallery:** sectioned image grid with captions (completed in Phase 3)
 5. **Phase 5 — Future Hebrew readiness:** Structure routes, components, labels, and typography so a full Hebrew version can be added later without redesigning the site.
 
 Option A (Hugo + PaperMod CSS override) is no longer relevant — the migration to Astro has been made.

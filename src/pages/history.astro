@@ -10,6 +10,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h1>Historical Context: Jewish Boryslaw</h1>
     <p>Information compiled from Yad Vashem's <em>Pinkas HaKehillot</em> (Encyclopedia of Jewish Communities in Poland), the authoritative record of Jewish communal life in pre-war Eastern Europe.</p>
 
+    <!-- Key facts callout -->
+    <div class="history-stats">
+      <div class="history-stat">
+        <span class="stat-number">13,000–14,000</span>
+        <span class="stat-label">Jews in Boryslaw before the war — approx. 40% of the city</span>
+      </div>
+      <div class="history-stat">
+        <span class="stat-number">July 1941</span>
+        <span class="stat-label">German occupation begins; persecution starts immediately</span>
+      </div>
+      <div class="history-stat">
+        <span class="stat-number">400–600</span>
+        <span class="stat-label">Jews who survived out of a community of 13,000+</span>
+      </div>
+    </div>
+
     <h2>Boryslaw Before the War</h2>
     <p>Boryslaw (Boryslav) was a city in Eastern Galicia — a region that had been part of the Austro-Hungarian Empire, passed to newly independent Poland after World War I, and was briefly under Soviet occupation (1939–1941) before the German invasion.</p>
     <p>The city was a major center of the petroleum industry; oil had been extracted in the region since the 1850s, and by the early twentieth century Boryslaw was one of the largest oil-producing cities in continental Europe.</p>
@@ -52,3 +68,41 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </ul>
   </article>
 </BaseLayout>
+
+<style>
+  .history-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 1.5rem 0 2rem;
+  }
+  @media (max-width: 600px) {
+    .history-stats { grid-template-columns: 1fr; }
+  }
+
+  .history-stat {
+    background: var(--color-parchment);
+    padding: 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-number {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--color-mid-gray);
+    line-height: 1.4;
+  }
+</style>

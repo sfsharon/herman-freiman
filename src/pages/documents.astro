@@ -27,7 +27,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Document card: Vollmacht -->
     <div class="doc-card">
       <div class="doc-card-head">
-        <span class="doc-card-title">Power of Attorney (Vollmacht)</span>
+        <a class="doc-card-title" href="/docs/its-td-file-790495-certificate-vollmacht.pdf" target="_blank" rel="noopener">Power of Attorney (Vollmacht) ↗</a>
         <span class="doc-card-date">October 20, 1959</span>
       </div>
       <div class="doc-card-body">
@@ -51,7 +51,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Document card: ITS Summary Card -->
     <div class="doc-card">
       <div class="doc-card-head">
-        <span class="doc-card-title">ITS Summary Card</span>
+        <a class="doc-card-title" href="/docs/its-td-file-790495-certificate-vollmacht.pdf" target="_blank" rel="noopener">ITS Summary Card ↗</a>
         <span class="doc-card-date">TD File 790 495</span>
       </div>
       <div class="doc-card-body">
@@ -72,7 +72,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Document card: Certificate of Residence -->
     <div class="doc-card">
       <div class="doc-card-head">
-        <span class="doc-card-title">Certificate of Residence — Key Fields</span>
+        <a class="doc-card-title" href="/docs/its-td-file-790495-certificate-vollmacht.pdf" target="_blank" rel="noopener">Certificate of Residence — Key Fields ↗</a>
         <span class="doc-card-date">February 26, 1960 · No. 413381</span>
       </div>
       <div class="doc-card-body">
@@ -92,7 +92,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <!-- Document card: Polish Registry -->
     <div class="doc-card">
       <div class="doc-card-head">
-        <span class="doc-card-title">Polish Jewish Registry Entry</span>
+        <a class="doc-card-title" href="/docs/arolsen-polish-registry-entry.pdf" target="_blank" rel="noopener">Polish Jewish Registry Entry ↗</a>
         <span class="doc-card-date">January 1947 · Warsaw</span>
       </div>
       <div class="doc-card-body">
@@ -138,6 +138,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #c8d8e8;
+    text-decoration: none;
+  }
+  a.doc-card-title:hover {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   .doc-card-date {

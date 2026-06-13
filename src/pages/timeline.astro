@@ -1,15 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const TD       = "/docs/arolsen-td-790495-dp-cards-registry.pdf";
+const CERT     = "/docs/its-td-file-790495-certificate-vollmacht.pdf";
+const PINKAS   = "/pinkas/#second-world-war";
+const PINKAS_ZAL = "/pinkas/#zal-liquidation";
+const PINKAS_LIB = "/pinkas/#liberation";
+const REGISTRY = "/docs/arolsen-polish-registry-entry.pdf";
+
 const periods = [
   {
     title: "Pre-War Period",
     years: "1910–1941",
     events: [
-      { year: "1910",     desc: "Born in Boryslaw, Galicia (then Austria-Hungary/Poland)", source: "DP-2 Cards, Polish Registry" },
-      { year: "Pre-1938", desc: "Last permanent residence: Boryslaw, Poland", source: "ITS Certificate 413381" },
-      { year: "Pre-1941", desc: "Married first wife; children born (names unknown)", source: "Family oral history" },
-      { year: "—",        desc: "Worked as tailor (Schneider)", source: "All documents" },
+      { year: "1910",     desc: "Born in Boryslaw, Galicia (then Austria-Hungary/Poland)", source: "DP-2 Cards, Polish Registry", url: TD },
+      { year: "Pre-1938", desc: "Last permanent residence: Boryslaw, Poland", source: "ITS Certificate of Residence No. 413381", url: CERT },
+      { year: "Pre-1941", desc: "Married first wife; children born (names unknown)", source: "Family oral history", url: null },
+      { year: "—",        desc: "Worked as tailor (Schneider)", source: "All documents — TD File, DP-2 Cards, Certificate", url: CERT },
     ],
     note: null,
   },
@@ -17,10 +24,10 @@ const periods = [
     title: "War Period",
     years: "1941–1944",
     events: [
-      { year: "1 Jul 1941",  desc: "German occupation of Boryslaw begins", source: "Yad Vashem Pinkas HaKehillot" },
-      { year: "Jul 1941",    desc: "Confined to Ghetto Boryslaw", source: "1959 ITS Form, TD File" },
-      { year: "1941–1944",   desc: "Forced labor in ZAL (Zwangsarbeitslager) Boryslaw — most workers served the Karpathen Öl A.G. oil concern; Herman, as a tailor (Schneider), served the German administration", source: "TD File 790 495; Pinkas HaKehillot" },
-      { year: "Unknown",     desc: "First wife and children perished during the Aktionen and deportations to the Belzec extermination camp", source: "Family history" },
+      { year: "1 Jul 1941",  desc: "German occupation of Boryslaw begins", source: "Yad Vashem Pinkas HaKehillot — Boryslaw entry", url: "/pinkas/#german-occupation" },
+      { year: "Jul 1941",    desc: "Confined to Ghetto Boryslaw", source: "ITS TD File 790 495 — summary card: '7.41–3.44 Gh. u. ZAL Boryslaw'", url: CERT },
+      { year: "1941–1944",   desc: "Forced labor in ZAL (Zwangsarbeitslager) Boryslaw — most workers served the Karpathen Öl A.G. oil concern; Herman, as a tailor (Schneider), served the German administration", source: "ITS TD File 790 495; Pinkas HaKehillot", url: CERT },
+      { year: "Unknown",     desc: "First wife and children perished during the Aktionen and deportations to the Belzec extermination camp", source: "Family oral history", url: null },
     ],
     note: "The Boryslaw ZAL was a forced labor camp serving the local oil industry, established after the October 1942 Aktion. Herman's profession as a tailor (Schneider) — a craft kept alive by the Germans for making and repairing clothing — is believed to have been the factor that kept him in local forced labor rather than the deportation trains to the Belzec extermination camp. The Pinkas HaKehillot confirms: 'craftsmen and persons in professions essential to the German economy' were the category specifically spared from final deportation.",
   },
@@ -28,10 +35,10 @@ const periods = [
     title: "Escape and Liberation",
     years: "1944",
     events: [
-      { year: "Mar 1944",     desc: "Escaped from ZAL Boryslaw — approximately one month before German forces liquidated the camp and deported its remaining inhabitants", source: "ITS TD File 790 495" },
-      { year: "13 Apr 1944",  desc: "German forces liquidate ZAL Boryslaw: ~600 remaining Jews transferred to Płaszów concentration camp. Those who had not escaped were subsequently sent to Mauthausen and Auschwitz.", source: "Pinkas HaKehillot" },
-      { year: "Mar–Aug 1944", desc: "Fought with partisan resistance fighters in the forests surrounding Boryslaw", source: "Family oral history; Pinkas HaKehillot" },
-      { year: "7 Aug 1944",   desc: "Boryslaw liberated by Soviet forces; Herman among the approximately 400 survivors who emerged", source: "Pinkas HaKehillot" },
+      { year: "Mar 1944",     desc: "Escaped from ZAL Boryslaw — approximately one month before German forces liquidated the camp and deported its remaining inhabitants", source: "ITS TD File 790 495 — end date '3.44' in summary card", url: CERT },
+      { year: "13 Apr 1944",  desc: "German forces liquidate ZAL Boryslaw: ~600 remaining Jews transferred to Płaszów concentration camp. Those who had not escaped were subsequently sent to Mauthausen and Auschwitz.", source: "Yad Vashem Pinkas HaKehillot — Boryslaw entry", url: PINKAS_ZAL },
+      { year: "Mar–Aug 1944", desc: "Fought with partisan resistance fighters in the forests surrounding Boryslaw", source: "Family oral history; Pinkas HaKehillot (forest resistance groups)", url: PINKAS_ZAL },
+      { year: "7 Aug 1944",   desc: "Boryslaw liberated by Soviet forces; Herman among the approximately 400 survivors who emerged", source: "Yad Vashem Pinkas HaKehillot — Boryslaw entry", url: PINKAS_LIB },
     ],
     note: "The Pinkas HaKehillot records that 'among the groups that hid in the forests, too, there were Jews equipped with weapons, who used them against their pursuers.' Herman's escape in March 1944 — before the 13 April deportation transport — almost certainly saved his life. It is the difference between his story and those of the hundreds who were taken to Płaszów and from there to Auschwitz.",
   },
@@ -39,12 +46,12 @@ const periods = [
     title: "Post-War Period",
     years: "1945–1948",
     events: [
-      { year: "1945",        desc: "Married Ester (née unknown) in Poland", source: "1959 ITS Form" },
-      { year: "1945–1946",   desc: "Resided at Bielawa, Wolności 131, Poland", source: "Polish Jewish Registry" },
-      { year: "4 Sep 1946",  desc: "Arrived at DP Camp 678, Ulm Boelcke Kaserne", source: "DP-2 Card, DP-3 Card" },
-      { year: "20 Nov 1946", desc: "Registered again at Ulm DP Camp", source: "DP-2 Card" },
-      { year: "1 Jul 1947",  desc: "Still at Ulm Boelcke Kaserne DP Camp", source: "DP Camp List" },
-      { year: "30 Sep 1948", desc: "Left Ulm DP Camp for Israel", source: "Emigration List Nr. 19" },
+      { year: "1945",        desc: "Married Ester (née unknown) in Poland", source: "1959 ITS Form (TD File 790 495)", url: CERT },
+      { year: "1945–1946",   desc: "Resided at Bielawa, Wolności 131, Poland", source: "Polish Jewish Registry, Warsaw — January 1947", url: REGISTRY },
+      { year: "4 Sep 1946",  desc: "Arrived at DP Camp 678, Ulm Boelcke Kaserne", source: "DP-2 Card (ITS ref. 124269705) and DP-3 Card (ITS ref. 106106920)", url: TD },
+      { year: "20 Nov 1946", desc: "Registered again at Ulm DP Camp", source: "DP-2 Card (ITS ref. 124269706)", url: TD },
+      { year: "1 Jul 1947",  desc: "Still at Ulm Boelcke Kaserne DP Camp", source: "DP Camp List, Ulm (ITS ref. 82035163)", url: TD },
+      { year: "30 Sep 1948", desc: "Left Ulm DP Camp for Israel", source: "Palestine Emigration List Nr. 19 (ITS ref. 82035128)", url: TD },
     ],
     note: null,
   },
@@ -52,10 +59,10 @@ const periods = [
     title: "Israel Period",
     years: "1948 onwards",
     events: [
-      { year: "4 Nov 1948",  desc: "Emigrated to Israel on ship Negba with wife Ester", source: "ITS Certificate, 1959 Form" },
-      { year: "Post-1948",   desc: "Settled at Hugo Moller Street 28, Kfar Ata-Giwat Ata", source: "All ITS documents" },
-      { year: "20 Oct 1959", desc: "Signed Power of Attorney for Dr. Herbert Mannheim (restitution)", source: "Vollmacht document" },
-      { year: "26 Feb 1960", desc: "ITS Certificate of Residence issued", source: "Certificate No. 413381" },
+      { year: "4 Nov 1948",  desc: "Emigrated to Israel on ship Negba with wife Ester", source: "ITS Certificate of Residence No. 413381; 1959 ITS Form", url: CERT },
+      { year: "Post-1948",   desc: "Settled at Hugo Moller Street 28, Kfar Ata-Giwat Ata", source: "ITS Certificate No. 413381 and all subsequent ITS documents", url: CERT },
+      { year: "20 Oct 1959", desc: "Signed Power of Attorney for Dr. Herbert Mannheim (restitution)", source: "Vollmacht document (TD File 790 495, outbound)", url: CERT },
+      { year: "26 Feb 1960", desc: "ITS Certificate of Residence issued", source: "Certificate No. 413381 (TD File 790 495, outbound)", url: CERT },
     ],
     note: "The Negba was one of several ships used by the nascent State of Israel to transport displaced persons from European DP camps. The family settled in Kfar Ata (today Kiryat Ata), a town near Haifa.",
   },
@@ -84,7 +91,10 @@ const periods = [
               <span class="vt-year">{event.year}</span>
               <div class="vt-body">
                 <p class="vt-desc">{event.desc}</p>
-                <span class="vt-source">{event.source}</span>
+                {event.url
+                  ? <a class="vt-source" href={event.url} target="_blank" rel="noopener">{event.source}</a>
+                  : <span class="vt-source">{event.source}</span>
+                }
               </div>
             </div>
           ))}
@@ -176,6 +186,16 @@ const periods = [
     font-size: 0.7rem;
     color: var(--color-mid-gray);
     font-style: italic;
+  }
+  a.vt-source {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: transparent;
+    transition: text-decoration-color 0.15s;
+  }
+  a.vt-source:hover {
+    text-decoration-color: var(--color-accent);
   }
 
   /* Narrative note after a period */

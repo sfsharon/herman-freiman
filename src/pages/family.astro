@@ -8,37 +8,40 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 >
   <article class="prose">
     <h1>Family Tree</h1>
-    <p>The following family structure has been established from available documentation. Significant gaps remain: the name of Herman's first wife and their children are not recorded in any surviving document.</p>
+    <p>The following family structure has been established from available documentation and family oral history.</p>
 
     <h2>Family Structure</h2>
-    <pre class="family-tree">FREIMAN / FRAJMAN Family of Boryslaw
+    <figure class="tree-figure">
+      <img
+        src="/photos/Freiman_family_tree.drawio.png"
+        alt="Freiman family tree diagram — Herman Zvi Freiman, his parents Feibel and Shifra Rosen, first wife Brunya (one child, both killed in Holocaust), and second wife Ester with their five children: Shraga (Feivel), Eliyahu, Moshe, Bracha, and Josef"
+      />
+    </figure>
 
-                    PARENTS
-    ┌─────────────────────┴─────────────────────┐
-    │                                           │
-Feibel FREIMAN                        Shifra ROSEN
-(Faivel/Faifel)                        (Schifra/Szyfra)
-    │
-    │
-                    SUBJECT
-    │
-Herman (Tzvi) FREIMAN ══════════════ m.1 Wife (name unknown)
-b. March 2, 1910                         │
-Boryslaw, Poland                         │
-    │                              Children (perished in Holocaust)
-    │
-    ╚══════════════════════════════ m.2 Ester FREIMAN
-    (married 1945, Poland)               b. April 15, 1920
-                                         │
-                    ┌───────────────────┼───────────────────┐
-                    │                   │                   │
-                 Son 1               Son 2               Son 3
-            (names not in documents — visible in family photo)</pre>
+    <h2>First Marriage</h2>
+    <table>
+      <thead><tr><th>Field</th><th>Information</th></tr></thead>
+      <tbody>
+        <tr><td>Wife</td><td>Brunya</td></tr>
+        <tr><td>Child</td><td>One child (name unknown)</td></tr>
+        <tr><td>Fate</td><td>Both killed during the Holocaust — Aktionen and deportations, Boryslaw 1941–1944</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Second Marriage</h2>
+    <table>
+      <thead><tr><th>Field</th><th>Information</th></tr></thead>
+      <tbody>
+        <tr><td>Wife</td><td>Ester FREIMAN (née unknown), b. April 15, 1920</td></tr>
+        <tr><td>Married</td><td>1945, Poland</td></tr>
+        <tr><td>Children</td><td>Shraga (Feivel), Eliyahu, Moshe, Bracha, Josef</td></tr>
+      </tbody>
+    </table>
 
     <h2>Known Name Variants</h2>
     <p>The family name appears in multiple transliterations across documents written in Polish, German, and Yiddish:</p>
     <table>
-      <thead><tr><th>Variant</th><th>Language/Context</th></tr></thead>
+      <thead><tr><th>Variant</th><th>Language / Context</th></tr></thead>
       <tbody>
         <tr><td>FREIMAN</td><td>German and ITS documents</td></tr>
         <tr><td>FRAJMAN</td><td>Polish registry</td></tr>
@@ -49,9 +52,9 @@ Boryslaw, Poland                         │
 
     <h2>Gaps &amp; Open Questions</h2>
     <ul>
-      <li><strong>First wife:</strong> Name unknown. No documentary record found. Family oral history confirms the marriage.</li>
-      <li><strong>Children from first marriage:</strong> Names and number unknown. All perished during the Holocaust.</li>
-      <li><strong>Sons of Herman and Ester:</strong> Three sons are visible in the family photograph. Names not found in surviving documents.</li>
+      <li><strong>First wife Brunya:</strong> Surname unknown. No documentary record found — known from family oral history.</li>
+      <li><strong>Child of first marriage:</strong> Name unknown. Killed in the Holocaust together with Brunya.</li>
+      <li><strong>Children of second marriage:</strong> Five children — Shraga (Feivel), Eliyahu, Moshe, Bracha (Brunya), Josef.</li>
       <li><strong>Siblings of Herman:</strong> Unknown. No documentation found for brothers or sisters.</li>
       <li><strong>Extended Rosen family (mother's side):</strong> Not documented in available sources.</li>
     </ul>
@@ -60,35 +63,15 @@ Boryslaw, Poland                         │
 </BaseLayout>
 
 <style>
-  .family-photo {
-    margin: 1.5rem 0 2rem;
-  }
-  .family-photo img {
-    width: 100%;
-    max-width: 560px;
-    border-radius: 2px;
-    filter: sepia(15%) contrast(97%);
-    border: 1px solid var(--color-border);
-  }
-  .family-photo figcaption {
-    font-size: 0.78rem;
-    color: var(--color-mid-gray);
-    font-style: italic;
-    margin-top: 0.45rem;
-    line-height: 1.4;
-  }
-
-  .family-tree {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.82rem;
-    line-height: 1.5;
-    background: var(--color-parchment);
+  .tree-figure {
+    margin: 1.25rem 0 2rem;
     border: 1px solid var(--color-border);
     border-radius: 3px;
-    padding: 1.25rem 1.5rem;
-    overflow-x: auto;
-    white-space: pre;
-    margin: 1rem 0 1.5rem;
-    color: var(--color-charcoal);
+    overflow: hidden;
+    background: var(--color-parchment);
+  }
+  .tree-figure img {
+    width: 100%;
+    display: block;
   }
 </style>

@@ -1,0 +1,121 @@
+<mxfile host="Electron" agent="Claude">
+  <diagram id="freiman-tree" name="Freiman Family">
+    <mxGraphModel dx="2278" dy="701" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="p_feibel" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;align=center;verticalAlign=middle;" value="&lt;b&gt;Feibel FREIMAN&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;(Faivel / Faifel)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="72" width="200" x="106" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p_shifra" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=12;align=center;verticalAlign=middle;" value="&lt;b&gt;Shifra ROSEN&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;(Schifra / Szyfra)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="72" width="200" x="366" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="jp" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#333333;" value="" vertex="1">
+          <mxGeometry height="16" width="16" x="328" y="108" as="geometry" />
+        </mxCell>
+        <mxCell id="wife1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;fillColor=#F5F5F5;strokeColor=#999999;fontSize=12;align=center;verticalAlign=middle;" value="&lt;b&gt;Brunya Freiman&lt;/b&gt;" vertex="1">
+          <mxGeometry height="78" width="190" x="-74" y="232" as="geometry" />
+        </mxCell>
+        <mxCell id="herman" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;strokeWidth=3;fontSize=13;align=center;verticalAlign=middle;" value="&lt;b&gt;Herman (Zvi) FREIMAN&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;b. 2 March 1910&lt;br&gt;Boryslaw, Poland&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="210" x="231" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="ester" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=13;align=center;verticalAlign=middle;" value="&lt;b&gt;Ester FREIMAN&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;b. 15 April 1920&lt;/font&gt;" vertex="1">
+          <mxGeometry height="120" width="210" x="571" y="212" as="geometry" />
+        </mxCell>
+        <mxCell id="jm1" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#333333;" value="" vertex="1">
+          <mxGeometry height="16" width="16" x="168" y="263" as="geometry" />
+        </mxCell>
+        <mxCell id="jm2" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#333333;" value="" vertex="1">
+          <mxGeometry height="16" width="16" x="498" y="262" as="geometry" />
+        </mxCell>
+        <mxCell id="children" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#999999;fontSize=12;align=center;verticalAlign=middle;" value="&lt;b&gt;Children&lt;/b&gt;&lt;br&gt;&lt;font style=&#39;font-size:10px&#39;&gt;(perished in the Holocaust)&lt;/font&gt;" vertex="1">
+          <mxGeometry height="70" width="151" x="100" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="jsons" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#333333;strokeColor=#333333;" value="" vertex="1">
+          <mxGeometry height="16" width="16" x="498" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="son1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;align=center;verticalAlign=middle;" value="Shraga (Faivel)" vertex="1">
+          <mxGeometry height="72" width="140" x="276" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="son2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;align=center;verticalAlign=middle;" value="Eliyahu" vertex="1">
+          <mxGeometry height="72" width="140" x="436" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="son3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;align=center;verticalAlign=middle;" value="Moshe" vertex="1">
+          <mxGeometry height="72" width="140" x="596" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pm1" edge="1" parent="1" source="p_feibel" style="html=1;endArrow=none;startArrow=none;strokeColor=#8C6A4A;strokeWidth=2.5;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="jp" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pm2" edge="1" parent="1" source="jp" style="html=1;endArrow=none;startArrow=none;strokeColor=#8C6A4A;strokeWidth=2.5;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="p_shifra" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pdesc" edge="1" parent="1" source="jp" style="html=1;endArrow=none;startArrow=none;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#666666;strokeWidth=1.5;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="herman" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_m1a" edge="1" parent="1" source="wife1" style="html=1;endArrow=none;startArrow=none;strokeColor=#8C6A4A;strokeWidth=2.5;exitX=1;exitY=0.5;" target="jm1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_m1b" edge="1" parent="1" source="jm1" style="html=1;endArrow=none;startArrow=none;strokeColor=#8C6A4A;strokeWidth=2.5;fontSize=11;fontColor=#5C4326;fontStyle=1;entryX=0;entryY=0.5;" target="herman" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_m2a" edge="1" parent="1" source="herman" style="html=1;endArrow=none;startArrow=none;strokeColor=#8C6A4A;strokeWidth=2.5;fontSize=11;fontColor=#5C4326;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="jm2" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="444" y="268.5" as="sourcePoint" />
+            <mxPoint x="490" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_m2b" edge="1" parent="1" style="html=1;endArrow=none;startArrow=none;strokeColor=#8C6A4A;strokeWidth=2.5;fontSize=10;fontColor=#5C4326;entryX=0;entryY=0.5;" value="Second Marriage&lt;div&gt;Married 1945, Poland&lt;/div&gt;">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="473.99654203572254" y="239.76480758718458" as="sourcePoint" />
+            <mxPoint x="531" y="238" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_m1desc" edge="1" parent="1" source="jm1" style="html=1;endArrow=none;startArrow=none;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#666666;strokeWidth=1.5;exitX=0.5;exitY=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="children" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="176" y="470" />
+            </Array>
+            <mxPoint x="170" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_sonsdesc" edge="1" parent="1" source="jm2" style="html=1;endArrow=none;startArrow=none;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#666666;strokeWidth=1.5;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="jsons" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s1" edge="1" parent="1" source="jsons" style="html=1;endArrow=none;startArrow=none;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#666666;strokeWidth=1.5;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="son1" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s2" edge="1" parent="1" source="jsons" style="html=1;endArrow=none;startArrow=none;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#666666;strokeWidth=1.5;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="son2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_s3" edge="1" parent="1" source="jsons" style="html=1;endArrow=none;startArrow=none;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#666666;strokeWidth=1.5;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="son3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="M4tMwltY6AsaEa_rLiK_-2" edge="1" parent="1" source="jm2" style="html=1;endArrow=none;startArrow=none;strokeColor=#8C6A4A;strokeWidth=2.5;fontSize=10;fontColor=#5C4326;entryX=0.01;entryY=0.477;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="ester" value="First Marriage">
+          <mxGeometry relative="1" x="-1" y="359" as="geometry">
+            <mxPoint x="-359" y="339" as="offset" />
+            <mxPoint x="530" y="270" as="sourcePoint" />
+            <mxPoint x="566" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M4tMwltY6AsaEa_rLiK_-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;align=center;verticalAlign=middle;" value="Bracha (Brunya)" vertex="1">
+          <mxGeometry height="72" width="140" x="757" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="M4tMwltY6AsaEa_rLiK_-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;align=center;verticalAlign=middle;" value="Yosef" vertex="1">
+          <mxGeometry height="72" width="140" x="930" y="469" as="geometry" />
+        </mxCell>
+        <mxCell id="M4tMwltY6AsaEa_rLiK_-6" edge="1" parent="1" style="html=1;endArrow=none;startArrow=none;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#666666;strokeWidth=1.5;exitX=0.5;exitY=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="662" y="443" as="sourcePoint" />
+            <mxPoint x="822" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M4tMwltY6AsaEa_rLiK_-8" edge="1" parent="1" style="html=1;endArrow=none;startArrow=none;edgeStyle=orthogonalEdgeStyle;rounded=0;strokeColor=#666666;strokeWidth=1.5;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="810" y="443" as="sourcePoint" />
+            <mxPoint x="1001" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

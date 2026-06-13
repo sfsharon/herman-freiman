@@ -51,7 +51,9 @@ const sections = [
         <div class="gallery-grid">
           {section.photos.map(p => (
             <figure class="gallery-figure">
-              <img src={p.src} alt={p.caption} loading="lazy" />
+              <a href={p.src} target="_blank" rel="noopener" title="Click to open full image">
+                <img src={p.src} alt={p.caption} loading="lazy" />
+              </a>
               <figcaption>{p.caption}</figcaption>
             </figure>
           ))}
@@ -63,9 +65,7 @@ const sections = [
 
 <style>
   .gallery-page {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    padding: 0 1.5rem 2rem;
+    padding: 0 0 2rem;
   }
 
   .gallery-title {
@@ -105,13 +105,23 @@ const sections = [
     gap: 1.25rem;
   }
 
+  .gallery-figure a {
+    display: block;
+    cursor: zoom-in;
+  }
+
   .gallery-figure img {
     width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
+    height: auto;
+    display: block;
     border-radius: 2px;
     filter: sepia(15%) contrast(98%);
-    display: block;
+    transition: filter 0.2s, opacity 0.2s;
+  }
+
+  .gallery-figure a:hover img {
+    filter: sepia(5%) contrast(100%);
+    opacity: 0.9;
   }
 
   .gallery-figure figcaption {

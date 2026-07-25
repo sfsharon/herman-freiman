@@ -32,3 +32,9 @@ The [main report](Herman_Freiman_Research_Report.md) consolidates documents from
 | [Arolsen Archives (ITS)](https://collections.arolsen-archives.org) | TD File 790 495, DP cards, emigration lists, residence certificate |
 | [Yad Vashem](https://yvng.yadvashem.org) | ITS database results, Pinkas HaKehillot (Boryslaw community history) |
 | Personal family archives | Photographs of Herman, Ester, and their sons in Israel |
+
+## Misc
+Connecting through hetzner :
+Alias gohetzner to :
+ssh -L 8080:localhost:8080 -L 1455:localhost:1455 root@46.224.66.242
+

@@ -10,6 +10,48 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <h1>Documents &amp; Transcriptions</h1>
     <p>Key primary source documents, with original German or Polish text alongside English translations.</p>
 
+    <!-- Ketubah -->
+    <h2>Marriage Certificate (Ketubah)</h2>
+    <p>The Ketubah — the Jewish marriage contract — of Herman and Ester Freiman, dated 1945. Written in Aramaic using the standard Ashkenazic formula, handwritten on lined paper (typical of wartime and immediate postwar conditions). The document is complete and signed by two witnesses.</p>
+
+    <div class="doc-card">
+      <div class="doc-card-head">
+        <span class="doc-card-title">Ketubah — כְּתוּבָּה</span>
+        <span class="doc-card-date">Shabbat · Hebrew year 5705 · 1945</span>
+      </div>
+      <div class="doc-card-body">
+        <div class="doc-pair">
+          <div>
+            <span class="doc-lang-label">Key Fields (OCR)</span>
+            <table class="doc-inner-table">
+              <tbody>
+                <tr><td>Day</td><td>Shabbat (Saturday) — <span dir="rtl" lang="he">בְּשַׁבָּת</span></td></tr>
+                <tr><td>Hebrew year</td><td>5705 (1944–1945) — <span dir="rtl" lang="he">שנת חמשת אלפים ושבע מאות וחמישה</span></td></tr>
+                <tr><td>Place</td><td><span dir="rtl" lang="he">ואוואסושט</span> — unidentified; Poland, 1945 (see note)</td></tr>
+                <tr><td>Groom</td><td>Herman Freiman · Hebrew: <span dir="rtl" lang="he">צְבִי הִירְשׁ</span> (Tzvi Hirsch)</td></tr>
+                <tr><td>Bride</td><td>Ester · Hebrew: <span dir="rtl" lang="he">אֶסְתֵּר</span></td></tr>
+                <tr><td>Mohar</td><td>100 zekukim of refined silver — <span dir="rtl" lang="he">מאה זקוקים כסף צרוף</span> (standard Ashkenazic amount)</td></tr>
+                <tr><td>Witness 1</td><td><span dir="rtl" lang="he">צבי בן אליעזר זלמן</span> — Tzvi ben Eliezer Zalman</td></tr>
+                <tr><td>Witness 2</td><td><span dir="rtl" lang="he">חיים בן אברהם</span> — Chayim ben Avraham</td></tr>
+                <tr><td>Language</td><td>Aramaic (standard Ketubah formula)</td></tr>
+                <tr><td>Closing formula</td><td><span dir="rtl" lang="he">ודבכל שריר וקים</span> — "and all is valid and confirmed"</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <span class="doc-lang-label">Notes</span>
+            <p class="doc-text"><strong>Hebrew name:</strong> The Ketubah confirms Herman used the Ashkenazic double name <em>Tzvi Hirsch</em> (צבי הירש) — tzvi (Hebrew: deer/stag) paired with hirsch (its Yiddish equivalent from German). This is the only document in the archive to record his Hebrew name.</p>
+            <p class="doc-text"><strong>Place name:</strong> The wedding location is written <span dir="rtl" lang="he">ואוואסושט</span>. Reading right to left (Hebrew direction) gives the phoneme sequence T-SH-O-S-A-W-W-A-W = <em>"Tchosawwaw"</em> — consistent with <strong>Częstochowa</strong> (Yiddish: <em>Tshenstokhov</em>), one of the largest CKŻP (Central Committee of Polish Jews) centres in 1945. In Galician Yiddish — the dialect Herman spoke — two documented sound shifts apply: the nasal "EN" → "O", and the guttural KH weakening to W/V, yielding "Tshosawwaw" from "Tshenstokhov." Częstochowa was a major transit and resettlement hub for Jewish survivors from eastern Galicia in 1945, and rabbinical marriages were actively organised there. Confirmation requires expert paleography of the original handwritten document.</p>
+            <p class="doc-text"><strong>Format:</strong> Handwritten on lined paper rather than a pre-printed form — typical of marriages conducted in displaced or transit communities immediately after the war.</p>
+          </div>
+        </div>
+        <figure class="doc-figure doc-figure--ketubah">
+          <img src="/photos/Ktuba_of_Herman_and_Esther_Freiman.jpeg" alt="Ketubah of Herman (Tzvi Hirsch) Freiman and Ester, 1945, handwritten in Aramaic" />
+          <figcaption>Ketubah of Herman (Tzvi Hirsch) Freiman and Ester, 1945. Handwritten Aramaic on lined paper. Signed by two witnesses: Tzvi ben Eliezer Zalman and Chayim ben Avraham.</figcaption>
+        </figure>
+      </div>
+    </div>
+
     <!-- Restitution overview -->
     <h2>German Restitution (Wiedergutmachung)</h2>
     <p>After emigrating to Israel, Herman pursued <em>Wiedergutmachung</em> (restitution/reparations) from West Germany for damages suffered during the Nazi persecution.</p>
@@ -208,5 +250,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--color-mid-gray);
     font-style: italic;
     margin-top: 0.4rem;
+  }
+
+  .doc-figure--ketubah img {
+    max-width: 560px;
+    width: 100%;
+  }
+
+  .doc-inner-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+  }
+  .doc-inner-table td {
+    padding: 0.35rem 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+    vertical-align: top;
+  }
+  .doc-inner-table td:first-child {
+    font-weight: 600;
+    color: var(--color-accent);
+    white-space: nowrap;
+    padding-right: 1rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 </style>
